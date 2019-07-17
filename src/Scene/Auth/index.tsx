@@ -16,7 +16,7 @@ export default class Auth extends React.Component<Props, State>{
     render(){
         return (
             <LinearGradient colors={['#58A0FF', '#5966FF']} style={styles.container}>
-                <Text>Home</Text>
+                <Text>LOGO</Text>
                 <TouchableOpacity onPress={this._next} style={styles.naverAuthBtn}>
                     <Text style={styles.naverAuthText}>네이버 아이디로 시작하기</Text>
                 </TouchableOpacity>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     naverAuthBtn: {
         backgroundColor: 'transparent',
         borderColor: '#fff',
-        borderRadius:10,
+        borderRadius: 5,
         borderWidth: 1,
         paddingVertical: 10,
         paddingHorizontal: 80

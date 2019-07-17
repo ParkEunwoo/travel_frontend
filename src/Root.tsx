@@ -1,19 +1,12 @@
 import React from 'react';
+import Navigator from './Scene';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function Root() {
-  return (
-    <View style={styles.container}>
-      <Text>Hello</Text>
-    </View>
-  );
-}
+interface Props {}
+interface State {}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default class Root extends React.Component<Props, State> {
+  render() {
+    return <Navigator />;
+  }
+}

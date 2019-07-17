@@ -2,19 +2,17 @@ import {
     createSwitchNavigator,
     createStackNavigator,
     createAppContainer,
-  } from 'react-navigation';
+} from 'react-navigation';
+import Auth from './Auth';
+import Main from './Main';
   
-  import Next from './Next';
-  import Home from './Home';
   
-  export default createAppContainer(
-    createSwitchNavigator(
-      {
-          Home,
-          Next
-      },
-      {
-        initialRouteName: 'Home',
-      }
-    )
-  );
+export default createAppContainer(
+    createSwitchNavigator({
+        Auth,
+        Main
+    },
+    {
+        initialRouteName: 'Auth',
+    })
+);

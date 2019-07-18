@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AuthSession } from 'expo';
 import axios from 'axios';
@@ -21,6 +21,20 @@ export default class Auth extends React.Component<Props, State>{
         token: null,
         info: null
     };
+    _retrieveData = async () => {
+        try {
+          const value = await AsyncStorage.getItem('USER_ID');
+          if (value !== null) {
+            // We have data!!
+            console.log(value);
+          }
+        } catch (error) {
+          // Error retrieving data
+        }
+      };
+    componentDidMount(){
+
+    }
     render(){
         return (
             <LinearGradient colors={['#58A0FF', '#5966FF']} style={styles.container}>
@@ -40,7 +54,7 @@ export default class Auth extends React.Component<Props, State>{
             authUrl: `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NV_APP_ID}&redirect_uri=${encodeURIComponent(redirectUrl)}&state=${STATE_STRING}`,
           });
         this.setState({ result });
-        console.log(result);
+        console.log('result', result);
         this._handleGetAccess();
     };
     _handleGetAccess = async () => {

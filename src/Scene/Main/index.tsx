@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Image } from 'react-native';
+import Header from './../../Components/Header';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -15,6 +16,7 @@ export default class Main extends React.Component<Props, State>{
     render(){
         return (
           <View style={styles.container}>
+              <Header></Header>
               <Text>Next</Text>
               <Button title="Back" onPress={this._back} />
           </View>
@@ -30,6 +32,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   }
 });

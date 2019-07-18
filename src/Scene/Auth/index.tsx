@@ -70,10 +70,12 @@ export default class Auth extends React.Component<Props, State>{
           result = await axios.get('https://openapi.naver.com/v1/nid/me', config);
           data = result.data;
           this.setState({info:data});
-          this._next();
+          console.log(this.state.info);
+          this._registProfile();
       };
-    _next = () => {
-        this.props.navigation.navigate('Main');
+    _registProfile = () => {
+        const {token, info} = this.state;
+        this.props.navigation.navigate('Register', {token: token.access_token, name: info.response.name, profile:info.response.profile_image});
     }
 }
 

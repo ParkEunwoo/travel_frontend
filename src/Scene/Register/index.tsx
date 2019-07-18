@@ -31,10 +31,9 @@ export default class Register extends React.Component<Props, State>{
     render(){
         return (
             <LinearGradient colors={['#58A0FF', '#5966FF']} style={styles.container}>
-                <Text>LOGO</Text>
-                <TouchableOpacity onPress={this._handlePressAsync} style={styles.naverAuthBtn}>
-                    <Text style={styles.naverAuthText}>네이버 아이디로 시작하기</Text>
-                </TouchableOpacity>
+                <Image source={{uri:this.state.profile}} style={styles.profile} />
+                <TextInput></TextInput>
+                <TouchableOpacity onPress={this._handlePressAsync} style={styles.naverAuthBtn}><Text style={styles.naverAuthText}>시작하기</Text></TouchableOpacity>
             </LinearGradient>
         );
     }
@@ -83,10 +82,15 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         paddingVertical: 10,
-        paddingHorizontal: 80
+        width: 300
     },
     naverAuthText: {
         color: '#fff',
-
+        textAlign: "center"
+    },
+    profile: {
+        borderRadius: 50,
+        width: 60,
+        height: 60
     }
 });

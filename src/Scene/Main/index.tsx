@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text, View, TextInput, Button, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Button, Image } from 'react-native';
 import Header from './../../Components/Header';
 import RecommendList from './../../Components/RecommendList';
 import Category from './../../Components/Category';
@@ -19,11 +19,14 @@ export default class Main extends React.Component<Props, State>{
         return (
           <View style={styles.container}>
               <Header />
-              <RecommendList />
-              <Category />
               <TouchableOpacity style={styles.upload}>
                 <Image source={require('./../../../assets/icons/upload.png')} style={{width:24, height:24}}/>
               </TouchableOpacity>
+              <ScrollView>
+                <RecommendList />
+                <Category />
+
+              </ScrollView>
           </View>
         );
     }

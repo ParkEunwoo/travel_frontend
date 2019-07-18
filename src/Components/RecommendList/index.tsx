@@ -18,7 +18,7 @@ export default class RecommendList extends React.Component<Props, State>{
         return (
             <View style={styles.container}>
             <View style={styles.header}></View>
-                <Swiper style={styles.wrapper} loop={true} >
+                <Swiper style={styles.wrapper} loop={true} dotStyle={{backgroundColor:'#ABB2FF'}} activeDotStyle={{backgroundColor:'#5966FF'}}>
                     <View style={styles.slide}>
                     <Image source={require('./../../../assets/icons/like_red.png')} style={styles.item} />
                     </View>

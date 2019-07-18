@@ -35,9 +35,19 @@ export default class Register extends React.Component<Props, State>{
                 <View style={styles.inputContainer}>
                     <Image source={require('./../../../assets/icons/user.png')} style={styles.icon}/>
                     <TextInput
+                        placeholder="이름"
                         style={styles.input}
                         onChangeText={(name) => this.setState({name})}
                         value={this.state.name}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Image source={require('./../../../assets/icons/Introduction.png')} style={styles.icon}/>
+                    <TextInput
+                        placeholder="자기소개를 입력해주세요."
+                        style={styles.input}
+                        onChangeText={(introduct) => this.setState({introduct})}
+                        value={this.state.introduct}
                     />
                 </View>
                 <TouchableOpacity onPress={this._handlePressAsync} style={styles.naverAuthBtn}><Text style={styles.naverAuthText}>시작하기</Text></TouchableOpacity>
@@ -88,6 +98,7 @@ const styles = StyleSheet.create({
         borderColor: '#fff',
         borderRadius: 5,
         borderWidth: 1,
+        marginTop: 40,
         paddingVertical: 10,
         width: 300
     },
@@ -98,13 +109,15 @@ const styles = StyleSheet.create({
     profile: {
         borderRadius: 50,
         width: 60,
-        height: 60
+        height: 60,
+        marginBottom: 10
     },
     inputContainer: {
         display: 'flex',
         flexDirection: 'row',
         width: 300,
         padding: 10,
+        marginTop: 30,
         borderBottomColor: 'white',
         borderBottomWidth: 1
     },

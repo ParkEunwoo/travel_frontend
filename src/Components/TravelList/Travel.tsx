@@ -9,7 +9,7 @@ interface Props {
 
 interface State {}
   
-export default class TravelList extends React.Component<Props, State>{
+export default class Travel extends React.Component<Props, State>{
     state = {
     }
     render(){

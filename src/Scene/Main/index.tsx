@@ -53,11 +53,11 @@ const styles = StyleSheet.create({
     right: 30,
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 1
   },
   wrapper: {
     flex: 1,
     alignSelf: 'stretch',
     borderWidth: 1,
-    borderColor:'red'
   }
 });

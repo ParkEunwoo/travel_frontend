@@ -46,8 +46,7 @@ const styles = StyleSheet.create({
         height: 400,
         alignSelf: 'stretch',
         alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1
+        justifyContent: 'center'
     },
     header: {
         position: 'absolute',

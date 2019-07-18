@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button, Image, ImageBackground } from 'react-native';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -14,13 +14,23 @@ export default class Travel extends React.Component<Props, State>{
     }
     render(){
         return (
-            <View style={styles.container}>
+            <TouchableOpacity style={styles.container}>
                 <View style={styles.userInfo}>
                     <Image source={require('./../../../assets/icons/star_blue.png')} style={styles.profile} />
                     <Text style={styles.name}>Username</Text>
                     <Text style={styles.time}>1h ago</Text>
                 </View>
-            </View>
+                <View style={styles.travel}>
+                    <ImageBackground source={require('./../../../assets/travel.jpg')} style={styles.image}>
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.title}>베트남 무계획 여행</Text>
+                            <Text style={styles.like}><Image source={require('./../../../assets/icons/like.png')} style={{width:15,height:15}}/> 122</Text>
+                        </View>
+                        <Text style={styles.category}>카테고리</Text>
+                    </ImageBackground>
+
+                </View>
+            </TouchableOpacity>
         );
     }
     _back = () => {
@@ -39,7 +49,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        borderWidth: 1
+        paddingRight: 10
+
     },
     profile: {
         width: 30,
@@ -55,5 +66,30 @@ const styles = StyleSheet.create({
         marginLeft: 'auto',
         fontSize: 14,
         color: "#8e8e8e"
+    },
+    travel: {
+        alignSelf: 'stretch',
+        padding: 10
+    },
+    image: {
+        height: 200,
+        paddingHorizontal: 20,
+    },
+    titleContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingTop: 16,
+        paddingBottom: 12,
+        alignItems: 'center'
+    },
+    title: {
+        fontSize: 19,
+        color: "white"
+    },
+    like: {
+        color: 'white'
+    },
+    category: {
+        color: 'white'
     }
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View, TextInput, Button, Image } from 'react-native';
 import Header from './../../Components/Header';
 import RecommendList from './../../Components/RecommendList';
 import Category from './../../Components/Category';
@@ -21,7 +21,9 @@ export default class Main extends React.Component<Props, State>{
               <Header />
               <RecommendList />
               <Category />
-              <Button title="Back" onPress={this._back} />
+              <TouchableOpacity style={styles.upload}>
+                <Image source={require('./../../../assets/icons/upload.png')} style={{width:24, height:24}}/>
+              </TouchableOpacity>
           </View>
         );
     }
@@ -36,5 +38,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start',
+  },
+  upload: {
+    position: 'absolute',
+    width: 60,
+    height: 60,
+    backgroundColor: '#5966FF',
+    borderRadius: 50,
+    bottom: 30,
+    right: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+
   }
 });

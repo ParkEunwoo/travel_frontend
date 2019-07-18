@@ -15,10 +15,11 @@ export default class Travel extends React.Component<Props, State>{
     render(){
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.category}><Text style={{color:'#5966FF'}}>동남아</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.category}><Text style={{color:'#5966FF'}}>중국</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.category}><Text style={{color:'#5966FF'}}>유럽</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.category}><Text style={{color:'#5966FF'}}>미국</Text></TouchableOpacity>
+                <View style={styles.userInfo}>
+                    <Image source={require('./../../../assets/icons/star_blue.png')} style={styles.profile} />
+                    <Text style={styles.name}>Username</Text>
+                    <Text style={styles.time}>1h ago</Text>
+                </View>
             </View>
         );
     }
@@ -30,16 +31,29 @@ export default class Travel extends React.Component<Props, State>{
 const styles = StyleSheet.create({
     container: {
         alignSelf: 'stretch',
-        flexDirection: 'row',
         alignItems: 'flex-start',
-        justifyContent: 'space-around',
-        padding: 10,
+        justifyContent: 'center'
     },
-    category: {
-        paddingVertical: 6,
-        paddingHorizontal: 16,
-        borderWidth: 1,
-        borderColor: '#5966FF',
-        borderRadius: 20
+    userInfo: {
+        alignSelf: 'stretch',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        borderWidth: 1
+    },
+    profile: {
+        width: 30,
+        height: 30,
+        borderRadius: 50,
+        margin: 10
+    },
+    name: {
+        fontSize: 14,
+        color: '#2c327e'
+    },
+    time: {
+        marginLeft: 'auto',
+        fontSize: 14,
+        color: "#8e8e8e"
     }
 });

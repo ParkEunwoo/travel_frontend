@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Button
 import Header from './../../Components/Header';
 import RecommendList from './../../Components/RecommendList';
 import Category from './../../Components/Category';
+import TravelList from './../../Components/TravelList';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -25,7 +26,7 @@ export default class Main extends React.Component<Props, State>{
               <ScrollView style={styles.wrapper}>
                 <RecommendList />
                 <Category />
-
+                <TravelList />
               </ScrollView>
           </View>
         );

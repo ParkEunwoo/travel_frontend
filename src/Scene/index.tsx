@@ -15,6 +15,6 @@ export default createAppContainer(
         Main
     },
     {
-        initialRouteName: 'Auth',
+        initialRouteName: 'Register',
     })
 );

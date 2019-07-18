@@ -18,21 +18,28 @@ interface State {}
 export default class Register extends React.Component<Props, State>{
     state = {
         token: '',
-        name:'',
-        profile: '',
+        name:'박은우',
+        profile: 'https://ssl.pstatic.net/static/pwe/address/img_profile.png',
         introduct: ''
     };
-    componentDidMount(){
-        const { token, name, profile } = this.props.navigation.state.params;
-        this.setState({
-            token, name, profile
-        });
-    }
+    // componentDidMount(){
+    //     const { token, name, profile } = this.props.navigation.state.params;
+    //     this.setState({
+    //         token, name, profile
+    //     });
+    // }
     render(){
         return (
             <LinearGradient colors={['#58A0FF', '#5966FF']} style={styles.container}>
                 <Image source={{uri:this.state.profile}} style={styles.profile} />
-                <TextInput></TextInput>
+                <View style={styles.inputContainer}>
+                    <Image source={require('./../../../assets/icons/user.png')} style={styles.icon}/>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(name) => this.setState({name})}
+                        value={this.state.name}
+                    />
+                </View>
                 <TouchableOpacity onPress={this._handlePressAsync} style={styles.naverAuthBtn}><Text style={styles.naverAuthText}>시작하기</Text></TouchableOpacity>
             </LinearGradient>
         );
@@ -92,5 +99,23 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         width: 60,
         height: 60
+    },
+    inputContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: 300,
+        padding: 10,
+        borderBottomColor: 'white',
+        borderBottomWidth: 1
+    },
+    input: {
+        width: 260,
+        height: 20,
+        paddingLeft: 10,
+        color: 'white'
+    },
+    icon: {
+        width: 20,
+        height: 20
     }
 });

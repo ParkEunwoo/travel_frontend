@@ -15,12 +15,19 @@ interface Props {
 
 interface State {}
   
-export default class Auth extends React.Component<Props, State>{
+export default class Register extends React.Component<Props, State>{
     state = {
-        result: null,
-        token: null,
-        info: null
+        token: '',
+        name:'',
+        profile: '',
+        introduct: ''
     };
+    componentDidMount(){
+        const { token, name, profile } = this.props.navigation.state.params;
+        this.setState({
+            token, name, profile
+        });
+    }
     render(){
         return (
             <LinearGradient colors={['#58A0FF', '#5966FF']} style={styles.container}>

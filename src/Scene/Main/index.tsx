@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Image } from 'react-native';
 import Header from './../../Components/Header';
 import RecommendList from './../../Components/RecommendList';
+import Category from './../../Components/Category';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -17,9 +18,9 @@ export default class Main extends React.Component<Props, State>{
     render(){
         return (
           <View style={styles.container}>
-              <Header></Header>
-              <RecommendList></RecommendList>
-              <Text>Next</Text>
+              <Header />
+              <RecommendList />
+              <Category />
               <Button title="Back" onPress={this._back} />
           </View>
         );

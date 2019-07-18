@@ -22,7 +22,7 @@ export default class Main extends React.Component<Props, State>{
               <TouchableOpacity style={styles.upload}>
                 <Image source={require('./../../../assets/icons/upload.png')} style={{width:24, height:24}}/>
               </TouchableOpacity>
-              <ScrollView>
+              <ScrollView style={styles.wrapper}>
                 <RecommendList />
                 <Category />
 
@@ -52,6 +52,11 @@ const styles = StyleSheet.create({
     right: 30,
     alignItems: 'center',
     justifyContent: 'center',
-
+  },
+  wrapper: {
+    flex: 1,
+    alignSelf: 'stretch',
+    borderWidth: 1,
+    borderColor:'red'
   }
 });

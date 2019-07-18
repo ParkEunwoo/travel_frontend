@@ -47,17 +47,18 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 30
+        borderWidth: 1
     },
     header: {
         position: 'absolute',
         top: 0,
         height: 150,
-        width: 800,
+        width: '100%',
         backgroundColor: '#5966FF',
     },
     wrapper: {
-        width: 800,
+        marginVertical: 30,
+        width: 500,
         justifyContent: 'center',
         alignItems: 'center',
     },

@@ -58,6 +58,5 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     alignSelf: 'stretch',
-    borderWidth: 1,
   }
 });

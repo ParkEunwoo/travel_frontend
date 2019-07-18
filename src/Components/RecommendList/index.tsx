@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Image } from 'react-native';
+import Swiper from 'react-native-swiper';
+
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -14,11 +16,24 @@ export default class RecommendList extends React.Component<Props, State>{
     }
     render(){
         return (
-          <View style={styles.container}>
-              <Image source={require('./../../../assets/icons/list.png')} style={styles.icon}/>
-              <Text>LOGO</Text>
-              <Image source={require('./../../../assets/icons/search.png')} style={styles.icon}/>
-          </View>
+            <View style={styles.container}>
+            <View style={styles.header}></View>
+                <Swiper style={styles.wrapper} loop={true} >
+                    <View style={styles.slide}>
+                    <Image source={require('./../../../assets/icons/like_red.png')} style={styles.item} />
+                    </View>
+                    <View style={styles.slide}>
+                    <Image source={require('./../../../assets/icons/location_lightblue.png')} style={styles.item} />
+                    </View>
+                    <View style={styles.slide}>
+                    <Image source={require('./../../../assets/icons/star_lightblue.png')} style={styles.item} />
+                    </View>
+                    <View style={styles.slide}>
+                    <Image source={require('./../../../assets/icons/calendar_lightblue.png')} style={styles.item} />
+                    </View>
+                </Swiper>
+
+            </View>
         );
     }
     _back = () => {
@@ -28,17 +43,30 @@ export default class RecommendList extends React.Component<Props, State>{
 
 const styles = StyleSheet.create({
     container: {
+        height: 400,
         alignSelf: 'stretch',
-        flexDirection: 'row',
-        backgroundColor: '#5966FF',
-        alignItems: 'flex-start',
-        justifyContent: 'space-between',
-        paddingTop: 50,
-        paddingBottom: 30
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 30
     },
-    icon: {
-        width: 20,
-        height: 20,
-        marginHorizontal: 20
+    header: {
+        position: 'absolute',
+        top: 0,
+        height: 150,
+        width: 800,
+        backgroundColor: '#5966FF',
+    },
+    wrapper: {
+        width: 800,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    slide: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    item: {
+        width: 300,
+        height: 300
     }
 });

@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Button, Image } from 'react-native';
 import MainHeader from '../../Components/MainHeader';
-import RecommendList from './../../Components/RecommendList';
-import Category from './../../Components/Category';
-import TravelList from './../../Components/TravelList';
+import RecommendList from '../../Components/RecommendList';
+import Category from '../../Components/Category';
+import TravelList from '../../Components/TravelList';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -13,7 +13,7 @@ interface Props {
 
 interface State {}
   
-export default class Basic extends React.Component<Props, State>{
+export default class Picture extends React.Component<Props, State>{
     state = {
     }
     render(){

@@ -12,7 +12,10 @@ interface State {}
 export default class PictureInput extends React.Component<Props, State>{
     render(){
         return (
-            <ScrollView style={styles.container}>
+            <ScrollView style={styles.container} horizontal={true} showsHorizontalScrollIndicator={false}>
+            <PictureItem />
+                <PictureItem />
+                <PictureItem />
                 <PictureItem />
             </ScrollView>
         );

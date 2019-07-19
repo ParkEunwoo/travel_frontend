@@ -11,9 +11,13 @@ interface State {}
 export default class PictureItem extends React.Component<Props, State>{
     render(){
         return (
-            <ScrollView style={styles.container}>
-
-            </ScrollView>
+            <View style={styles.container}>
+                <Image source={require('./../../../assets/travel.jpg')} style={styles.picture} />
+                <Image source={require('./../../../assets/icons/star.png')} style={styles.star} />
+                <TouchableOpacity style={styles.button}>
+                    <Image source={require('./../../../assets/icons/upload.png')} style={styles.plus} />
+                </TouchableOpacity>
+            </View>
         );
     }
   
@@ -22,8 +26,33 @@ export default class PictureItem extends React.Component<Props, State>{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignSelf:'stretch',
+        margin: 10,
     },
+    picture: {
+        width: 350,
+        height: 350
+    },
+    button: {
+        backgroundColor: "#B3B3B3",
+        borderRadius: 50,
+        width: 100,
+        height: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        left: 125,
+        top: 125,
+    },
+    star: {
+        width: 20,
+        height: 20,
+        position: 'absolute',
+        left: 10,
+        top: 10
+    },
+    plus: {
+        width: 50,
+        height: 50
+    }
 });

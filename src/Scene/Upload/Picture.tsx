@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Image 
 import Header from '../../Components/Header';
 import UploadStatus from './../../Components/UploadStatus';
 import PictureLocation from './../../Components/PictureLocation';
-import BasicInput from './../../Components/BasicInput';
+import PictureInput from './../../Components/PictureInput';
 import Button from './../../Components/Button';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
@@ -23,7 +23,7 @@ export default class Picture extends React.Component<Props, State>{
               <Header />
             <UploadStatus/>
             <PictureLocation />
-            <BasicInput />
+            <PictureInput />
             <Button />
           </View>
         );

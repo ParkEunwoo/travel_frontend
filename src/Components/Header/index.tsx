@@ -15,9 +15,9 @@ export default class Header extends React.Component<Props, State>{
     render(){
         return (
           <View style={styles.container}>
-              <Image source={require('./../../../assets/icons/list.png')} style={styles.icon}/>
+              <Image source={require('./../../../assets/icons/back_blue.png')} style={styles.icon}/>
               <Text style={styles.text}>일지 업로드</Text>
-              <Image source={require('./../../../assets/icons/search.png')} style={styles.icon}/>
+              <Image source={require('./../../../assets/icons/quit_blue.png')} style={styles.icon}/>
           </View>
         );
     }
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20
     },
     text: {
-        color: '#5966FF'
+        color: '#5966FF',
+        fontSize: 16
     }
 });

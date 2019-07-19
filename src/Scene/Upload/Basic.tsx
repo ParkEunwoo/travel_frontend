@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Button, Image } from 'react-native';
-import MainHeader from '../../Components/MainHeader';
+import Header from '../../Components/Header';
 import RecommendList from './../../Components/RecommendList';
 import Category from './../../Components/Category';
 import TravelList from './../../Components/TravelList';
@@ -19,7 +19,7 @@ export default class Basic extends React.Component<Props, State>{
     render(){
         return (
           <View style={styles.container}>
-              <MainHeader />
+              <Header />
               <TouchableOpacity style={styles.upload}>
                 <Image source={require('./../../../assets/icons/upload.png')} style={{width:24, height:24}}/>
               </TouchableOpacity>

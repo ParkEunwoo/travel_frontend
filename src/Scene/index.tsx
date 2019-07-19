@@ -19,6 +19,6 @@ export default createAppContainer(
         Picture
     },
     {
-        initialRouteName: 'Basic',
+        initialRouteName: 'Picture',
     })
 );

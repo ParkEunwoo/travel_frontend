@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Button, Image } from 'react-native';
-import MainHeader from '../../Components/MainHeader';
-import RecommendList from '../../Components/RecommendList';
-import Category from '../../Components/Category';
-import TravelList from '../../Components/TravelList';
+import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Image } from 'react-native';
+import Header from '../../Components/Header';
+import UploadStatus from './../../Components/UploadStatus';
+import PictureLocation from './../../Components/PictureLocation';
+import BasicInput from './../../Components/BasicInput';
+import Button from './../../Components/Button';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -19,15 +20,11 @@ export default class Picture extends React.Component<Props, State>{
     render(){
         return (
           <View style={styles.container}>
-              <MainHeader />
-              <TouchableOpacity style={styles.upload}>
-                <Image source={require('./../../../assets/icons/upload.png')} style={{width:24, height:24}}/>
-              </TouchableOpacity>
-              <ScrollView style={styles.wrapper}>
-                <RecommendList />
-                <Category />
-                <TravelList />
-              </ScrollView>
+              <Header />
+            <UploadStatus/>
+            <PictureLocation />
+            <BasicInput />
+            <Button />
           </View>
         );
     }

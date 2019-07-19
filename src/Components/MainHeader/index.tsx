@@ -9,7 +9,7 @@ interface Props {
 
 interface State {}
   
-export default class Header extends React.Component<Props, State>{
+export default class MainHeader extends React.Component<Props, State>{
     state = {
     }
     render(){

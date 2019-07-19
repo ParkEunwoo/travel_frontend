@@ -20,7 +20,7 @@ export default class Basic extends React.Component<Props, State>{
         return (
           <View style={styles.container}>
               <Header />
-            <UploadStatus />
+            <UploadStatus/>
             <BasicInput />
             <Button />
           </View>

@@ -26,10 +26,10 @@ export default class Button extends React.Component<Props, State>{
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        marginBottom: 40
     },
     button: {
         backgroundColor: '#5966FF',

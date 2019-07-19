@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
         padding: 10
     },
     image: {
-        height: 200,
+        width: '100%',
+        height: '100%',
         paddingHorizontal: 20,
     },
     titleContainer: {

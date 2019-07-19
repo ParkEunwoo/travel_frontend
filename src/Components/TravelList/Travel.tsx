@@ -16,7 +16,7 @@ export default class Travel extends React.Component<Props, State>{
         return (
             <TouchableOpacity style={styles.container}>
                 <View style={styles.userInfo}>
-                    <Image source={require('./../../../assets/icons/star_blue.png')} style={styles.profile} />
+                    <Image source={require('./../../../assets/icons/mainprofile.png')} style={styles.profile} />
                     <Text style={styles.name}>Username</Text>
                     <Text style={styles.time}>1h ago</Text>
                 </View>

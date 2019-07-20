@@ -7,6 +7,8 @@ import Auth from './Auth';
 import Register from './Register';
 import Main from './Main';
 import {Basic, Detail, Picture} from './Upload';
+import ProfileEdit from './ProfileEdit';
+import FollowList from './FollowList';
   
   
 export default createAppContainer(
@@ -16,9 +18,11 @@ export default createAppContainer(
         Main,
         Basic,
         Detail,
-        Picture
+        Picture,
+        ProfileEdit,
+        FollowList
     },
     {
-        initialRouteName: 'Picture',
+        initialRouteName: 'FollowList',
     })
 );

@@ -21,7 +21,7 @@ export default class Profile extends React.Component<Props, State>{
     render(){
         return (
           <View style={styles.container}>
-              <Header />
+              <Header title="마이페이지" />
               <TouchableOpacity style={styles.upload}>
                 <Image source={require('./../../../assets/icons/upload.png')} style={{width:24, height:24}}/>
               </TouchableOpacity>

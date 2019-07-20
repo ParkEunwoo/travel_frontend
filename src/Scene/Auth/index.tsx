@@ -40,7 +40,8 @@ export default class Auth extends React.Component<Props, State>{
             <LinearGradient colors={['#58A0FF', '#5966FF']} style={styles.container}>
                 <Image source={require('./../../../assets/icon.png')}/>
                 <TouchableOpacity onPress={this._handlePressAsync} style={styles.naverAuthBtn}>
-                    <Text style={styles.naverAuthText}><Image source={require('./../../../assets/icons/star.png')} style={styles.icon}/> 네이버 아이디로 시작하기</Text>
+                    <Image source={require('./../../../assets/icons/naverlogo.png')} style={styles.icon}/>
+                    <Text style={styles.naverAuthText}>네이버 아이디로 시작하기</Text>
                 </TouchableOpacity>
             </LinearGradient>
         );
@@ -88,7 +89,9 @@ const styles = StyleSheet.create({
     },
     naverAuthBtn: {
         backgroundColor: 'transparent',
+        flexDirection: 'row',
         borderColor: '#fff',
+        justifyContent: 'center',
         borderRadius: 5,
         borderWidth: 1,
         paddingVertical: 10,
@@ -97,11 +100,11 @@ const styles = StyleSheet.create({
     naverAuthText: {
         color: '#fff',
         textAlign: "center",
-        lineHeight: 20,
+        fontSize: 15,
+        marginLeft: 10,
     },
     icon: {
         width: 20,
         height: 20,
-        margin: 10,
     }
 });

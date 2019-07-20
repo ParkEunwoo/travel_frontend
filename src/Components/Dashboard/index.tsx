@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Image, TouchableOpacity } from 'react-native';
+import { withNavigation } from 'react-navigation';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -9,25 +10,25 @@ interface Props {
 
 interface State {}
   
-export default class Dashboard extends React.Component<Props, State>{
+class Dashboard extends React.Component<Props, State>{
     state = {
     }
     render(){
         return (
           <View style={styles.container}>
-            <View style={styles.wrapper}>
+            <TouchableOpacity style={styles.wrapper}>
                 <Text style={styles.number}>32</Text>
                 <Text style={styles.text}>LOGS</Text>
-            </View>
-            <View style={styles.wrapper}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.wrapper} onPress={()=>this.props.navigation.navigate('FollowList')} >
                 <View style={styles.divide} />
                 <Text style={styles.number}>128</Text>
                 <Text style={styles.text}>FOLLOWERS</Text>
-            </View>
-            <View style={styles.wrapper}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.wrapper}>
                 <Text style={styles.number}>83</Text>
                 <Text style={styles.text}>FOLLOWING</Text>
-            </View>
+            </TouchableOpacity>
           </View>
         );
     }
@@ -65,3 +66,5 @@ const styles = StyleSheet.create({
         top: '25%',
     }
 });
+
+export default withNavigation(Dashboard);

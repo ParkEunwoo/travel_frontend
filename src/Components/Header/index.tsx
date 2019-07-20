@@ -54,7 +54,8 @@ class Header extends React.Component<Props, State>{
             this.props.navigation.navigate('ProfileEdit');
         }
         else {
-            this.props.navigation.goBack();
+            console.log(this.props.navigation.goBack)
+            this.props.navigation.actions.goBack();
         }
     }
     _rightWork = () => {
@@ -62,7 +63,7 @@ class Header extends React.Component<Props, State>{
             this.props.navigation.navigate('ProfileEdit');
         }
         else {
-            this.props.navigation.goBack();
+            this.props.navigation.goBack(null);
         }
     }
 }

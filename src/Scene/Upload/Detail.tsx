@@ -20,13 +20,13 @@ export default class Detail extends React.Component<Props, State>{
     render(){
         return (
           <View style={styles.container}>
-              <Header />
+              <Header title="일지 업로드" />
             <UploadStatus/>
             <View style={styles.wrapper} >
               <PictureList />
               <DetailInput />
             </View>
-            <Button />
+            <Button text="저장하기" action={()=>this.props.navigation.navigate('Profile')} />
           </View>
         );
     }

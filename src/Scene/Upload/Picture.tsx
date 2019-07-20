@@ -20,11 +20,11 @@ export default class Picture extends React.Component<Props, State>{
     render(){
         return (
           <View style={styles.container}>
-              <Header />
+              <Header title="일지 업로드" />
             <UploadStatus/>
             <PictureLocation />
             <PictureInput />
-            <Button />
+            <Button text="다음" action={()=>this.props.navigation.navigate('Detail')} />
           </View>
         );
     }

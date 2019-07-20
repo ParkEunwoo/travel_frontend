@@ -15,7 +15,7 @@ import Map from './Map';
 import LogView from './LogView';
 
 const state = {
-    USER_ID: ''
+    USER_ID: 'test'
 }
 
 const _retrieveData = async () => {

@@ -22,12 +22,12 @@ export default class Register extends React.Component<Props, State>{
         profile: 'https://ssl.pstatic.net/static/pwe/address/img_profile.png',
         introduct: ''
     };
-    // componentDidMount(){
-    //     const { token, name, profile } = this.props.navigation.state.params;
-    //     this.setState({
-    //         token, name, profile
-    //     });
-    // }
+    componentDidMount(){
+        const { token, name, profile } = this.props.navigation.state.params;
+        this.setState({
+            token, name, profile
+        });
+    }
     render(){
         return (
             <LinearGradient colors={['#58A0FF', '#5966FF']} style={styles.container}>

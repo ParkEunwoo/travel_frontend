@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Image } from 'react-native';
 import Header from '../../Components/Header';
 import UploadStatus from './../../Components/UploadStatus';
-import BasicInput from './../../Components/BasicInput';
+import DetailInput from './../../Components/DetailInput';
+import PictureList from './../../Components/PictureList';
 import Button from './../../Components/Button';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
@@ -21,7 +22,10 @@ export default class Detail extends React.Component<Props, State>{
           <View style={styles.container}>
               <Header />
             <UploadStatus/>
-            <BasicInput />
+            <View style={styles.wrapper} >
+              <PictureList />
+              <DetailInput />
+            </View>
             <Button />
           </View>
         );
@@ -53,5 +57,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     alignSelf: 'stretch',
+    flexDirection: 'row'
   }
 });

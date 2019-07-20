@@ -21,17 +21,6 @@ export default class Auth extends React.Component<Props, State>{
         token: null,
         info: null
     };
-    _retrieveData = async () => {
-        try {
-          const value = await AsyncStorage.getItem('USER_ID');
-          if (value !== null) {
-            // We have data!!
-            console.log(value);
-          }
-        } catch (error) {
-          // Error retrieving data
-        }
-      };
     componentDidMount(){
 
     }
@@ -68,6 +57,7 @@ export default class Auth extends React.Component<Props, State>{
                   'Authorization': `Bearer ${data.access_token}`
               }
           }
+          
           result = await axios.get('https://openapi.naver.com/v1/nid/me', config);
           data = result.data;
           this.setState({info:data});

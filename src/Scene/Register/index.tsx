@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AuthSession } from 'expo';
 import axios from 'axios';
@@ -50,40 +50,24 @@ export default class Register extends React.Component<Props, State>{
                         value={this.state.introduct}
                     />
                 </View>
-                <TouchableOpacity onPress={this._handlePressAsync} style={styles.naverAuthBtn}><Text style={styles.naverAuthText}>시작하기</Text></TouchableOpacity>
+                <TouchableOpacity onPress={this._storeData} style={styles.naverAuthBtn}><Text style={styles.naverAuthText}>시작하기</Text></TouchableOpacity>
             </LinearGradient>
         );
     }
   
-    _handlePressAsync = async () => {
-        let redirectUrl = AuthSession.getRedirectUrl();
-        console.log(redirectUrl);
-        console.log(encodeURIComponent(redirectUrl));
-        let result = await AuthSession.startAsync({
-            authUrl: `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NV_APP_ID}&redirect_uri=${encodeURIComponent(redirectUrl)}&state=${STATE_STRING}`,
-          });
-        this.setState({ result });
-        console.log(result);
-        this._handleGetAccess();
-    };
-    _handleGetAccess = async () => {
-          let result = await axios.get(`https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${NV_APP_ID}&client_secret=${NV_APP_SECRET}&code=${this.state.result.params.code}&state=${STATE_STRING}`);
-          let data = result.data;
-          console.log(data);
-          this.setState({token:data});
-          const config = {
-              headers: {
-                  'Authorization': `Bearer ${data.access_token}`
-              }
-          }
-          result = await axios.get('https://openapi.naver.com/v1/nid/me', config);
-          data = result.data;
-          this.setState({info:data});
-          this._next();
-      };
-    _next = () => {
+    _storeData = async () => {
+        try {
+          await AsyncStorage.setItem('USER_ID', 'I like to save it.');
+        } catch (error) {
+            console.log(error);
+          // Error saving data
+        }
+        //axios 서버 통신
+
+        
         this.props.navigation.navigate('Main');
-    }
+    };
+    
 }
 
 const styles = StyleSheet.create({

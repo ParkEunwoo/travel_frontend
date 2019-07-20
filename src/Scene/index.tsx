@@ -29,6 +29,6 @@ export default createAppContainer(
         LogView
     },
     {
-        initialRouteName: 'LogView',
+        initialRouteName: (true?'Auth':'Main'),
     })
 );

@@ -11,6 +11,7 @@ import ProfileEdit from './ProfileEdit';
 import Profile from './Profile';
 import FollowList from './FollowList';
 import Map from './Map';
+import LogView from './LogView';
   
   
 export default createAppContainer(
@@ -24,9 +25,10 @@ export default createAppContainer(
         ProfileEdit,
         Profile,
         FollowList,
-        Map
+        Map,
+        LogView
     },
     {
-        initialRouteName: 'Map',
+        initialRouteName: 'LogView',
     })
 );

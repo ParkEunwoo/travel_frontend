@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     profile: {
-        width: 50,
-        height: 50
+        width: 80,
+        height: 80
     },
     name: {
         color: '#2C327E',
         fontSize: 20,
-        marginVertical: 8
+        marginVertical: 10
     },
     introduct: {
         color: '#8E8E8E',

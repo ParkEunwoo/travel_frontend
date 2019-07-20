@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Button, Image } from 'react-native';
 import Header from '../../Components/Header';
 import UserInfo from './../../Components/UserInfo';
-import RecommendList from './../../Components/RecommendList';
+import Dashboard from './../../Components/Dashboard';
 import Category from './../../Components/Category';
 import TravelList from './../../Components/TravelList';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
@@ -22,11 +22,11 @@ export default class Profile extends React.Component<Props, State>{
           <View style={styles.container}>
               <Header />
               <UserInfo />
+              <Dashboard />
               <TouchableOpacity style={styles.upload}>
                 <Image source={require('./../../../assets/icons/upload.png')} style={{width:24, height:24}}/>
               </TouchableOpacity>
               <ScrollView style={styles.wrapper}>
-                <RecommendList />
                 <Category />
                 <TravelList />
               </ScrollView>

@@ -47,10 +47,23 @@ class Header extends React.Component<Props, State>{
         );
     }
     _leftWork = () => {
-        this.state.title=='logo'?this.props.navigation.navigate('Profile'):this.props.navigation.goBack();
+        if(this.state.title=='logo'){
+            this.props.navigation.navigate('Profile');
+        }
+        else if(this.state.title=='마이페이지'){
+            this.props.navigation.navigate('ProfileEdit');
+        }
+        else {
+            this.props.navigation.goBack();
+        }
     }
     _rightWork = () => {
-        this.props.navigation.navigate('');
+        if(this.state.title=='마이페이지'){
+            this.props.navigation.navigate('ProfileEdit');
+        }
+        else {
+            this.props.navigation.goBack();
+        }
     }
 }
 

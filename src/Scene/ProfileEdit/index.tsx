@@ -17,7 +17,7 @@ export default class ProfileEdit extends React.Component<Props, State>{
     render(){
         return (
             <View style={styles.container}>
-                <Header />
+                <Header title="프로필 수정" />
                 <View style={styles.wrapper}>
                     <Image source={require('./../../../assets/icons/mainprofile.png')} style={styles.profile} />
                     <View style={styles.inputContainer}>
@@ -35,7 +35,7 @@ export default class ProfileEdit extends React.Component<Props, State>{
                         />
                     </View>
                 </View>
-                <Button />
+                <Button text="저장하기" />
             </View>
         );
     }

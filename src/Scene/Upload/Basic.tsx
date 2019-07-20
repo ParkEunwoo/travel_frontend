@@ -19,15 +19,12 @@ export default class Basic extends React.Component<Props, State>{
     render(){
         return (
           <View style={styles.container}>
-              <Header />
+              <Header title="일지 업로드"/>
             <UploadStatus/>
             <BasicInput />
-            <Button />
+            <Button text="다음" action={()=>this.props.navigation.navigate('Picture')} />
           </View>
         );
-    }
-    _back = () => {
-        this.props.navigation.navigate('Auth');
     }
 }
 

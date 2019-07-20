@@ -20,7 +20,7 @@ export default class Main extends React.Component<Props, State>{
         return (
           <View style={styles.container}>
               <Header title='logo' />
-              <TouchableOpacity style={styles.upload}>
+              <TouchableOpacity style={styles.upload} onPress={()=>this.props.navigation.navigate('Basic')}>
                 <Image source={require('./../../../assets/icons/upload.png')} style={{width:24, height:24}}/>
               </TouchableOpacity>
               <ScrollView style={styles.wrapper}>

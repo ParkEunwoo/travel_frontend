@@ -4,19 +4,30 @@ import axios from 'axios';
 
 interface Props {
     navigation: any;
+    text: string;
+    action: Function;
   }
 
 interface State {}
   
 export default class Button extends React.Component<Props, State>{
     state = {
+        text: ''
     };
 
+    componentDidMount(){
+        const {text} = this.props;
+        this.setState({
+            text
+        });
+    }
+
     render(){
+        const {text} = this.state;
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.text}>다음</Text>
+                <TouchableOpacity style={styles.button} onPress={this.props.action}>
+                    <Text style={styles.text}>{text}</Text>
                 </TouchableOpacity>
             </View>
         );

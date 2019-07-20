@@ -9,7 +9,7 @@ import TravelList from './../../Components/TravelList';
 
 interface Props {
     navigation: any;
-  }
+}
 
 interface State {}
   
@@ -19,7 +19,7 @@ export default class Main extends React.Component<Props, State>{
     render(){
         return (
           <View style={styles.container}>
-              <Header />
+              <Header title='logo' left_icon='list' right_icon='search' />
               <TouchableOpacity style={styles.upload}>
                 <Image source={require('./../../../assets/icons/upload.png')} style={{width:24, height:24}}/>
               </TouchableOpacity>

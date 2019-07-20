@@ -67,23 +67,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     inputContainer: {
-        display: 'flex',
         flexDirection: 'row',
-        width: 300,
+        alignSelf: 'stretch',
         padding: 10,
         marginTop: 30,
         borderBottomColor: '#ABB2FF',
         borderBottomWidth: 1
     },
     input: {
-        width: 260,
+        flex: 1,
         height: 20,
         paddingLeft: 10,
         color: '#5966FF',
         fontSize: 15
     },
     dateInput: {
-        width: 130,
+        flex: 1,
         height: 20,
         paddingLeft: 10,
         color: '#5966FF',

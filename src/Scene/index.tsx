@@ -23,6 +23,6 @@ export default createAppContainer(
         FollowList
     },
     {
-        initialRouteName: 'Basic',
+        initialRouteName: 'FollowList',
     })
 );

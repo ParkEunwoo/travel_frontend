@@ -10,6 +10,7 @@ import {Basic, Detail, Picture} from './Upload';
 import ProfileEdit from './ProfileEdit';
 import Profile from './Profile';
 import FollowList from './FollowList';
+import Map from './Map';
   
   
 export default createAppContainer(
@@ -22,9 +23,10 @@ export default createAppContainer(
         Picture,
         ProfileEdit,
         Profile,
-        FollowList
+        FollowList,
+        Map
     },
     {
-        initialRouteName: 'Profile',
+        initialRouteName: 'Map',
     })
 );

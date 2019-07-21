@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button, Image, ImageBackground } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -21,6 +22,7 @@ export default class Travel extends React.Component<Props, State>{
                     <Text style={styles.time}>1h ago</Text>
                 </View>
                 <View style={styles.travel}>
+                    <LinearGradient colors={['#000000', '#00000000', '#00000000']} style={styles.gradient}>
                     <ImageBackground source={require('./../../../assets/travel.jpg')} style={styles.image}>
                         <View style={styles.titleContainer}>
                             <Text style={styles.title}>베트남 무계획 여행</Text>
@@ -28,6 +30,7 @@ export default class Travel extends React.Component<Props, State>{
                         </View>
                         <Text style={styles.category}>카테고리</Text>
                     </ImageBackground>
+                        </LinearGradient>
 
                 </View>
             </TouchableOpacity>
@@ -91,5 +94,9 @@ const styles = StyleSheet.create({
     },
     category: {
         color: 'white'
+    },
+    gradient: {
+        flex: 1,
+        alignSelf: 'stretch'
     }
 });

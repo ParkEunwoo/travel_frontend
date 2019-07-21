@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import {ImagePicker, Permissions, Constants} from 'expo';
 import { AuthSession } from 'expo';
 import axios from 'axios';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
@@ -27,11 +28,44 @@ export default class Register extends React.Component<Props, State>{
         this.setState({
             token, name, profile
         });
+        this.getPermissionAsync();
     }
+    getPermissionAsync = async () => {
+      if (Constants.platform.ios) {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
+    }
+    
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      exif: true
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: {
+          uri: result.uri,
+          time: result.exif.DateTime,
+          latitude: result.exif.GPSLatitude,
+          longitude: result.exif.GPSLongitude
+       } });
+    }
+  };
+
     render(){
         return (
             <LinearGradient colors={['#58A0FF', '#5966FF']} style={styles.container}>
-                <Image source={{uri:this.state.profile}} style={styles.profile} />
+
+                <TouchableOpacity onPress={this._pickImage}>
+                    <Image source={{uri:this.state.profile}} style={styles.profile} />
+                </TouchableOpacity>
                 <View style={styles.inputContainer}>
                     <Image source={require('./../../../assets/icons/user.png')} style={styles.icon}/>
                     <TextInput

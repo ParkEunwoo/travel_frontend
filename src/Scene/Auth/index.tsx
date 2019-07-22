@@ -22,7 +22,7 @@ export default class Auth extends React.Component<Props, State>{
         info: null
     };
     componentDidMount(){
-
+        axios.get('https://pic-me-back.herokuapp.com/');
     }
     render(){
         return (

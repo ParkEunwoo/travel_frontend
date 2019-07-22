@@ -2,12 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import {ImagePicker, Permissions, Constants} from 'expo';
-import { AuthSession } from 'expo';
 import axios from 'axios';
-//https://docs.expo.io/versions/latest/sdk/imagepicker/
-const NV_APP_ID = '1gPlAVzR2876G7EwPnBQ';
-const NV_APP_SECRET = 'QiGSFar9Qa';
-const STATE_STRING = 'sfdjlweioj312esdf';
 
 
 interface Props {
@@ -19,9 +14,10 @@ interface State {}
 export default class Register extends React.Component<Props, State>{
     state = {
         token: '',
-        name:'박은우',
-        profile: 'https://ssl.pstatic.net/static/pwe/address/img_profile.png',
-        introduct: ''
+        name:'',
+        profile: null,
+        introduct: '',
+        image: null
     };
     componentDidMount(){
         const { token, name, profile } = this.props.navigation.state.params;
@@ -40,22 +36,19 @@ export default class Register extends React.Component<Props, State>{
     }
     
   _pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    let image = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [1, 1],
       exif: true
     });
 
-    console.log(result);
 
-    if (!result.cancelled) {
-      this.setState({ image: {
-          uri: result.uri,
-          time: result.exif.DateTime,
-          latitude: result.exif.GPSLatitude,
-          longitude: result.exif.GPSLongitude
-       } });
+    if (!image.cancelled) {
+        this.setState({
+            image,
+            profile: image.uri
+        });
     }
   };
 
@@ -90,15 +83,29 @@ export default class Register extends React.Component<Props, State>{
     }
   
     _storeData = async () => {
-        try {
-          await AsyncStorage.setItem('USER_ID', 'I like to save it.');
-        } catch (error) {
-            console.log(error);
-          // Error saving data
-        }
         //axios 서버 통신
-
+        const data = new FormData();
+        const {profile, token, name, introduct } = this.state;
+        const file = {
+            uri: profile,
+            type: 'image/'+profile.split('.').pop(),
+            name: profile.split('/').pop().split('.')[0]
+        }
+        data.append('file', file);
+        data.append('token', token);
+        data.append('name', name);
+        data.append('introduct', introduct);
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+        }
+        const result = await axios.post('https://pic-me-back.herokuapp.com/api/user/auth/signup', data, config);
         
+        try {
+            await AsyncStorage.setItem('USER_ID', result.data._id);
+          } catch (error) {
+              console.log(error);
+            // Error saving data
+          }
         this.props.navigation.navigate('Main');
     };
     

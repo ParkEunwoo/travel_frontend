@@ -101,7 +101,10 @@ export default class Register extends React.Component<Props, State>{
         const result = await axios.post('https://pic-me-back.herokuapp.com/api/user/auth/signup', data, config);
         
         try {
-            await AsyncStorage.setItem('USER_ID', result.data._id);
+            await AsyncStorage.multiSet([['USER_ID', result.data._id],
+                                        ['TOKEN', result.data.token],
+                                        ['NAME', result.data.name],
+                                        ['PROFILE', result.data.profile.uri]]);
           } catch (error) {
               console.log(error);
             // Error saving data

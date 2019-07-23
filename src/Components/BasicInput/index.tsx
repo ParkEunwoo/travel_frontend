@@ -14,7 +14,7 @@ export default class BasicInput extends React.Component<Props, State>{
 
     render(){
         return (
-            <View style={styles.container}>
+            <View style={styles.wrapper}>
                 <View style={styles.inputContainer}>
                     <Image source={require('./../../../assets/icons/pen_lightblue.png')} style={styles.icon}/>
                     <TextInput
@@ -60,7 +60,7 @@ export default class BasicInput extends React.Component<Props, State>{
 }
 
 const styles = StyleSheet.create({
-    container: {
+    wrapper: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',

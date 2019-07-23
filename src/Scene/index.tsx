@@ -46,6 +46,6 @@ export default createAppContainer(
         LogView
     },
     {
-        initialRouteName: (!state.USER_ID?'Spot':'Main'),
+        initialRouteName: (!state.USER_ID?'Auth':'Main'),
     })
 );

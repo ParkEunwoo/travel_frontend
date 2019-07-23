@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Button, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Button, Image, AsyncStorage } from 'react-native';
 import Header from '../../Components/Header';
 import UserInfo from './../../Components/UserInfo';
 import Dashboard from './../../Components/Dashboard';
@@ -17,8 +17,25 @@ interface State {}
   
 export default class Profile extends React.Component<Props, State>{
     state = {
+      USER_ID: null,
+      name: null,
+      profile:null,
+      introduct: null
+    }
+    async componentWillMount(){
+      await AsyncStorage.multiGet(['USER_ID', 'name', 'profile', 'introduct'], (err, stores) => {
+          stores.map((result, i, store) => {
+              // get at each store's key/value so you can work with it
+              let key = store[i][0];
+              let value = store[i][1];
+              this.setState({
+                  [key]: value
+              })
+          });
+      });
     }
     render(){
+      const {name, profile, introduct} = this.state;
         return (
           <View style={styles.container}>
               <Header title="마이페이지" />
@@ -26,7 +43,7 @@ export default class Profile extends React.Component<Props, State>{
                 <Image source={require('./../../../assets/icons/upload.png')} style={{width:24, height:24}}/>
               </TouchableOpacity>
               <ScrollView style={styles.wrapper}>
-              <UserInfo />
+              <UserInfo name={name} profile={profile} introduct={introduct} />
               <FollowButton />
               <Dashboard />
                 <Category />

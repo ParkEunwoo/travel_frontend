@@ -39,7 +39,7 @@ class Header extends React.Component<Props, State>{
     render(){
         const {title, left_icon, right_icon} = this.state;
         return (
-          <View style={[styles.container, title=='logo' && styles.main]}>
+          <View style={styles.container}>
               <TouchableHighlight onPress={this._leftWork} ><Image source={left_icon} style={styles.icon}/></TouchableHighlight>
               {title=='logo' ?<Image source={require('./../../../assets/icon.png')} style={{width:20,height:20}}/> : <Text style={styles.text}>{title}</Text>}
               <TouchableHighlight onPress={this._rightWork} ><Image source={right_icon} style={styles.icon}/></TouchableHighlight>
@@ -76,9 +76,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingTop: 50,
         paddingBottom: 30
-    },
-    main: {
-        backgroundColor: '#5966FF',
     },
     icon: {
         width: 20,

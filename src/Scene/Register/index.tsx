@@ -103,8 +103,9 @@ export default class Register extends React.Component<Props, State>{
         try {
             await AsyncStorage.multiSet([['USER_ID', result.data._id],
                                         ['TOKEN', result.data.token],
-                                        ['NAME', result.data.name],
-                                        ['PROFILE', result.data.profile.uri]]);
+                                        ['name', result.data.name],
+                                        ['profile', result.data.profile.uri],
+                                        ['introduct', result.data.introduct]]);
           } catch (error) {
               console.log(error);
             // Error saving data

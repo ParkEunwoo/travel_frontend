@@ -5,8 +5,8 @@ import axios from 'axios';
 interface Props {
     navigation: any;
     text: string;
-    action: Function;
-  }
+    action(): void;
+}
 
 interface State {}
   

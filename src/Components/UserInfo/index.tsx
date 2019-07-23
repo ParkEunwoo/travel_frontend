@@ -1,20 +1,40 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
-import axios from 'axios';
 
 interface Props {
     navigation: any;
+    name: string;
+    profile: string;
+    introduct: string;
   }
 
 interface State {}
   
 export default class UserInfo extends React.Component<Props, State>{
+    state = {
+        profile: null,
+        name: null,
+        introduct: null
+    }
+    static getDerivedStateFromProps(nextProps, preState){
+        const {introduct, name, profile} = nextProps;
+        if(preState.introduct !== introduct || preState.name !== name || preState.profile !== profile){
+            return {
+                name,
+                profile,
+                introduct
+            };
+        }
+        return null;
+    }
+     
     render(){
+        const {profile, name, introduct} = this.state;
         return (
             <View style={styles.container}>
-                <Image source={require('./../../../assets/icons/mainprofile.png')} style={styles.profile} />
-                <Text style={styles.name}>이름</Text>
-                <Text style={styles.introduct}>자기소개</Text>
+                <Image source={{uri:profile}} style={styles.profile} />
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.introduct}>{introduct}</Text>
             </View>
         );
     }
@@ -29,7 +49,8 @@ const styles = StyleSheet.create({
     },
     profile: {
         width: 80,
-        height: 80
+        height: 80,
+        borderRadius: 50
     },
     name: {
         color: '#2C327E',

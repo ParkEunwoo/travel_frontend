@@ -11,11 +11,10 @@ interface State {}
 export default class SpotItem extends React.Component<Props, State>{
     render(){
         return (
-            <View style={styles.container}>
-                <TouchableOpacity style={styles.button}>
-                    <Image source={require('./../../../assets/icons/upload.png')} style={styles.plus} />
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={styles.container}>
+                <Text style={styles.text}>오사카 도톤보리</Text>
+                <Image source={require('./../../../assets/icons/pen_gray.png')} style={styles.edit} />
+            </TouchableOpacity>
         );
     }
   
@@ -25,32 +24,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignSelf:'stretch',
-        margin: 10,
-    },
-    picture: {
-        width: 350,
-        height: 350
-    },
-    button: {
-        backgroundColor: "#B3B3B3",
-        borderRadius: 50,
-        width: 100,
-        height: 100,
-        justifyContent: 'center',
+        marginHorizontal: 20,
+        marginVertical: 10,
+        backgroundColor: "#ABB2FF",
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingVertical: 14,
+        paddingHorizontal: 20,
         alignItems: 'center',
-        position: 'absolute',
-        left: 125,
-        top: 125,
+        borderRadius: 2
     },
-    star: {
+    text: {
+        color: '#5966FF',
+        fontSize: 18
+    },
+    edit: {
         width: 20,
-        height: 20,
-        position: 'absolute',
-        left: 10,
-        top: 10
-    },
-    plus: {
-        width: 50,
-        height: 50
+        height: 20
     }
 });

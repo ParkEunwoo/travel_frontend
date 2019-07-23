@@ -13,7 +13,7 @@ interface Props {
 
 interface State {}
   
-export default class Picture extends React.Component<Props, State>{
+export default class Spot extends React.Component<Props, State>{
     state = {
     }
     render(){

@@ -22,7 +22,7 @@ export default class Basic extends React.Component<Props, State>{
               <Header title="일지 업로드"/>
             <UploadStatus/>
             <BasicInput />
-            <Button text="다음" action={()=>this.props.navigation.navigate('Picture')} />
+            <Button text="저장하기" action={()=>this.props.navigation.navigate('Picture')} />
           </View>
         );
     }

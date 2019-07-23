@@ -7,7 +7,7 @@ import {
 import Auth from './Auth';
 import Register from './Register';
 import Main from './Main';
-import {Basic, Detail, Picture} from './Upload';
+import {Basic, Detail, Spot} from './Upload';
 import ProfileEdit from './ProfileEdit';
 import Profile from './Profile';
 import FollowList from './FollowList';
@@ -38,7 +38,7 @@ export default createAppContainer(
         Main,
         Basic,
         Detail,
-        Picture,
+        Spot,
         ProfileEdit,
         Profile,
         FollowList,
@@ -46,6 +46,6 @@ export default createAppContainer(
         LogView
     },
     {
-        initialRouteName: (!state.USER_ID?'Auth':'Main'),
+        initialRouteName: (!state.USER_ID?'Spot':'Main'),
     })
 );

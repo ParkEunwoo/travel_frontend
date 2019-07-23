@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
-import PictureItem from './PictureItem';
+import SpotItem from './SpotItem';
 import axios from 'axios';
 
 interface Props {
@@ -9,14 +9,14 @@ interface Props {
 
 interface State {}
   
-export default class PictureInput extends React.Component<Props, State>{
+export default class SpotInput extends React.Component<Props, State>{
     render(){
         return (
             <ScrollView style={styles.container} horizontal={true} showsHorizontalScrollIndicator={false}>
-            <PictureItem />
-                <PictureItem />
-                <PictureItem />
-                <PictureItem />
+                <SpotItem />
+                <SpotItem />
+                <SpotItem />
+                <SpotItem />
             </ScrollView>
         );
     }

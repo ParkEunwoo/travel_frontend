@@ -24,8 +24,8 @@ export default class UploadStatus extends React.Component<Props, State>{
             </View>
               <View style={styles.textContainer}>
                   <Text style={styles.text}>기본정보</Text>
-                  <Text style={styles.text}>사진추가</Text>
-                  <Text style={styles.text}>텍스트추가</Text>
+                  <Text style={styles.text}>장소추가</Text>
+                  <Text style={styles.text}>내용추가</Text>
               </View>
           </View>
         );

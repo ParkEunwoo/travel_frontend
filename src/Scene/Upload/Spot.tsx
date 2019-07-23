@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Image } from 'react-native';
 import Header from '../../Components/Header';
-import UploadStatus from './../../Components/UploadStatus';
-import PictureLocation from './../../Components/PictureLocation';
-import PictureInput from './../../Components/PictureInput';
-import Button from './../../Components/Button';
+import UploadStatus from '../../Components/UploadStatus';
+import SpotInput from '../../Components/SpotInput';
+import Button from '../../Components/Button';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -22,8 +21,7 @@ export default class Picture extends React.Component<Props, State>{
           <View style={styles.container}>
               <Header title="일지 업로드" />
             <UploadStatus/>
-            <PictureLocation />
-            <PictureInput />
+            <SpotInput />
             <Button text="다음" action={()=>this.props.navigation.navigate('Detail')} />
           </View>
         );

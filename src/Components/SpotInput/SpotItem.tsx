@@ -8,12 +8,10 @@ interface Props {
 
 interface State {}
   
-export default class PictureItem extends React.Component<Props, State>{
+export default class SpotItem extends React.Component<Props, State>{
     render(){
         return (
             <View style={styles.container}>
-                <Image source={require('./../../../assets/travel.jpg')} style={styles.picture} />
-                <Image source={require('./../../../assets/icons/star.png')} style={styles.star} />
                 <TouchableOpacity style={styles.button}>
                     <Image source={require('./../../../assets/icons/upload.png')} style={styles.plus} />
                 </TouchableOpacity>

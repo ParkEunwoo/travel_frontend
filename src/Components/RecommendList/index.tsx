@@ -7,32 +7,30 @@ import Swiper from 'react-native-swiper';
 
 interface Props {
     navigation: any;
+    name: string;
   }
 
 interface State {}
   
 export default class RecommendList extends React.Component<Props, State>{
     state = {
+        name: null
+    }
+    
+    static getDerivedStateFromProps(nextProps, preState){
+        const {name} = nextProps;
+        if(preState.name !== name){
+            return {
+                name
+            };
+        }
+        return null;
     }
     render(){
         return (
             <View style={styles.container}>
-            <View style={styles.header}></View>
-                <Swiper style={styles.wrapper} loop={true} dotStyle={{backgroundColor:'#ABB2FF'}} activeDotStyle={{backgroundColor:'#5966FF'}}>
-                    <View style={styles.slide}>
-                    <Image source={require('./../../../assets/icons/like_red.png')} style={styles.item} />
-                    </View>
-                    <View style={styles.slide}>
-                    <Image source={require('./../../../assets/icons/location_lightblue.png')} style={styles.item} />
-                    </View>
-                    <View style={styles.slide}>
-                    <Image source={require('./../../../assets/icons/star_lightblue.png')} style={styles.item} />
-                    </View>
-                    <View style={styles.slide}>
-                    <Image source={require('./../../../assets/icons/calendar_lightblue.png')} style={styles.item} />
-                    </View>
-                </Swiper>
-
+                <Text style={styles.text}>{this.state.name}님,</Text>
+                <Text style={styles.text}>이런 여행지는 어떠신가요?</Text>
             </View>
         );
     }
@@ -43,30 +41,14 @@ export default class RecommendList extends React.Component<Props, State>{
 
 const styles = StyleSheet.create({
     container: {
-        height: 400,
         alignSelf: 'stretch',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    header: {
-        position: 'absolute',
-        top: 0,
-        height: 150,
-        width: '100%',
-        backgroundColor: '#5966FF',
-    },
-    wrapper: {
-        marginVertical: 30,
-        width: 500,
+        alignItems: 'flex-start',
         justifyContent: 'center',
-        alignItems: 'center',
+        paddingHorizontal: 30,
+        paddingVertical: 16
     },
-    slide: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    item: {
-        width: 300,
-        height: 300
+    text: {
+        color: '#5966FF',
+        fontSize: 20
     }
 });

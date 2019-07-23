@@ -23,8 +23,8 @@ class Header extends React.Component<Props, State>{
         let right_icon = require('./../../../assets/icons/quit_blue.png');
 
         if(title=='logo'){
-            left_icon = require('./../../../assets/icons/list.png');
-            right_icon = require('./../../../assets/icons/search.png');
+            left_icon = require('./../../../assets/icons/user_lightblue.png');
+            right_icon = require('./../../../assets/icons/search_blue.png');
         }
         else if(title=='마이페이지'){
             left_icon = require('./../../../assets/icons/list_blue.png');

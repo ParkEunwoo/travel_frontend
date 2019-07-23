@@ -22,15 +22,14 @@ export default class Travel extends React.Component<Props, State>{
                     <Text style={styles.time}>1h ago</Text>
                 </View>
                 <View style={styles.travel}>
-                    <LinearGradient colors={['#000000', '#00000000', '#00000000']} style={styles.gradient}>
-                    <ImageBackground source={require('./../../../assets/travel.jpg')} style={styles.image}>
+                    <Image source={require('./../../../assets/travel.jpg')} style={styles.image} />
+                    <LinearGradient colors={['#00000099',  '#00000000']} style={styles.gradient}>
                         <View style={styles.titleContainer}>
                             <Text style={styles.title}>베트남 무계획 여행</Text>
                             <Text style={styles.like}><Image source={require('./../../../assets/icons/like.png')} style={{width:15,height:15}}/> 122</Text>
                         </View>
                         <Text style={styles.category}>카테고리</Text>
-                    </ImageBackground>
-                        </LinearGradient>
+                    </LinearGradient>
 
                 </View>
             </TouchableOpacity>
@@ -75,8 +74,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     image: {
-        paddingHorizontal: 20,
-        paddingBottom: '50%'
+        width: '100%'
     },
     titleContainer: {
         flexDirection: 'row',
@@ -97,6 +95,11 @@ const styles = StyleSheet.create({
     },
     gradient: {
         flex: 1,
-        alignSelf: 'stretch'
+        width: '100%',
+        paddingHorizontal: 20,
+        position: 'absolute',
+        top: 10,
+        left: 10,
+        paddingBottom: 50
     }
 });

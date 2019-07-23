@@ -30,7 +30,7 @@ const _retrieveData = async () => {
       // Error retrieving data
     }
   };
-
+_retrieveData();
 export default createAppContainer(
     createSwitchNavigator({
         Auth,

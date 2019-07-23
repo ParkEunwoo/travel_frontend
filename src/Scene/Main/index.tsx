@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Button, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, ScrollView, Text, View, TextInput, Button, Image, AsyncStorage } from 'react-native';
 import Header from '../../Components/Header';
 import RecommendList from './../../Components/RecommendList';
 import Category from './../../Components/Category';
@@ -15,6 +15,20 @@ interface State {}
   
 export default class Main extends React.Component<Props, State>{
     state = {
+      USER_ID:null,
+      name:null
+    }
+    async componentWillMount(){
+      await AsyncStorage.multiGet(['USER_ID', 'name'], (err, stores) => {
+          stores.map((result, i, store) => {
+              // get at each store's key/value so you can work with it
+              let key = store[i][0];
+              let value = store[i][1];
+              this.setState({
+                  [key]: value
+              })
+          });
+      });
     }
     render(){
         return (
@@ -24,7 +38,7 @@ export default class Main extends React.Component<Props, State>{
                 <Image source={require('./../../../assets/icons/upload.png')} style={{width:24, height:24}}/>
               </TouchableOpacity>
               <ScrollView style={styles.wrapper}>
-                <RecommendList />
+                <RecommendList name={this.state.name}/>
                 <Category />
                 <TravelList />
               </ScrollView>

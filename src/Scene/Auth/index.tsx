@@ -27,7 +27,7 @@ export default class Auth extends React.Component<Props, State>{
     render(){
         return (
             <LinearGradient colors={['#58A0FF', '#5966FF']} style={styles.container}>
-                <Image source={require('./../../../assets/icon.png')}/>
+                <Image source={require('./../../../assets/travel.jpg')}/>
                 <TouchableOpacity onPress={this._handlePressAsync} style={styles.naverAuthBtn}>
                     <Image source={require('./../../../assets/icons/naverlogo.png')} style={styles.icon}/>
                     <Text style={styles.naverAuthText}>네이버 아이디로 시작하기</Text>

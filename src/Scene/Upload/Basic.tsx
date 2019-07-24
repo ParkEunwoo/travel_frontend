@@ -105,7 +105,7 @@ export default class Basic extends React.Component<Props, State>{
         }
         const result = await axios.post('https://pic-me-back.herokuapp.com/api/travel', data);
         
-        this.props.navigation.navigate('Spot');
+        this.props.navigation.navigate('Spot', {travel_id:result.data._id});
     };
 }
 

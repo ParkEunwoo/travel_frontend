@@ -41,7 +41,7 @@ class Header extends React.Component<Props, State>{
         return (
           <View style={styles.container}>
               <TouchableHighlight onPress={this._leftWork} ><Image source={left_icon} style={styles.icon}/></TouchableHighlight>
-              {title=='logo' ?<Image source={require('./../../../assets/icon.png')} style={{width:20,height:20}}/> : <Text style={styles.text}>{title}</Text>}
+              {title=='logo' ?<Image source={require('./../../../assets/travel.jpg')} style={{width:20,height:20}}/> : <Text style={styles.text}>{title}</Text>}
               <TouchableHighlight onPress={this._rightWork} ><Image source={right_icon} style={styles.icon}/></TouchableHighlight>
           </View>
         );

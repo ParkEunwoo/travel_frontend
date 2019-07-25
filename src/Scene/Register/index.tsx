@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import {ImagePicker, Permissions, Constants} from 'expo';
+import * as Permissions from 'expo-permissions';
+import Constants from 'expo-constants';
+import ImagePicker from 'expo-image-picker';
 import axios from 'axios';
 
 

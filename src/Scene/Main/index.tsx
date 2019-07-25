@@ -4,6 +4,7 @@ import Header from '../../Components/Header';
 import RecommendList from './../../Components/RecommendList';
 import Category from './../../Components/Category';
 import TravelList from './../../Components/TravelList';
+import axios from 'axios';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -16,7 +17,8 @@ interface State {}
 export default class Main extends React.Component<Props, State>{
     state = {
       USER_ID:null,
-      name:null
+      name:null,
+      travelList: null
     }
     async componentWillMount(){
       await AsyncStorage.multiGet(['USER_ID', 'name'], (err, stores) => {
@@ -29,6 +31,23 @@ export default class Main extends React.Component<Props, State>{
               })
           });
       });
+
+      const result = await axios.get('https://pic-me-back.herokuapp.com/api/travel/');
+      
+      console.log(result.data);
+      const travelList = result.data.map((value)=>{
+        return {
+          name: value.name,
+          time: value.register_date,
+          like: value.like.length,
+          title: value.title,
+          category: value.category,
+          image: value.image.uri
+        }
+      });
+      this.setState({
+        travelList
+      })
     }
     render(){
         return (
@@ -40,7 +59,7 @@ export default class Main extends React.Component<Props, State>{
               <ScrollView style={styles.wrapper}>
                 <RecommendList name={this.state.name}/>
                 <Category />
-                <TravelList />
+                <TravelList travelList={this.state.travelList}/>
               </ScrollView>
           </View>
         );

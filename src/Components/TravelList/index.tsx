@@ -8,21 +8,38 @@ interface Props {
     navigation: any;
   }
 
-interface State {}
+interface travel {
+    name: string;
+    time: string;
+    title: string;
+    category: string;
+    like: number;
+    image: string;
+}
+interface State {
+    travelList: travel[];
+}
   
 export default class TravelList extends React.Component<Props, State>{
     state = {
+        travelList: []
+    }
+    static getDerivedStateFromProps(nextProps, preState){
+        const {travelList} = nextProps;
+        if(preState.travelList !== travelList){
+            return {
+                travelList
+            };
+        }
+        return null;
     }
     render(){
+        const travels = this.state.travelList?this.state.travelList.map((value, index) => `
+            <Travel key=${index} name=${value.name} time=${value.time} title=${value.title} like=${value.like} category=${value.category} image=${value.image} />
+        `):null;
         return (
             <View style={styles.container}>
-            <Travel />
-                <Travel />
-                <Travel />
-                <Travel />
-                <Travel />
-                <Travel />
-                <Travel />
+                {travels&&travels}
             </View>
         );
     }

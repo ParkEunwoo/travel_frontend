@@ -12,23 +12,44 @@ interface State {}
   
 export default class Travel extends React.Component<Props, State>{
     state = {
+        name: '',
+        time: '',
+        title: '',
+        category: '',
+        like: 0,
+        image: null
+    }
+    
+    static getDerivedStateFromProps(nextProps, preState){
+        const {name, time, title, category, like, image} = nextProps;
+        if(preState.name !== name || preState.time !== time || preState.title !== title || preState.category !== category || preState.like !== like || preState.image !== image){
+            return {
+              name,
+              time,
+              title,
+              category,
+              like,
+              image
+            };
+        }
+        return null;
     }
     render(){
+        const {name, time, title, category, like, image} = this.state;
         return (
             <TouchableOpacity style={styles.container}>
                 <View style={styles.userInfo}>
-                    <Image source={require('./../../../assets/icons/mainprofile.png')} style={styles.profile} />
-                    <Text style={styles.name}>Username</Text>
-                    <Text style={styles.time}>1h ago</Text>
+                    <Text style={styles.name}>{name}</Text>
+                    <Text style={styles.time}>{time}</Text>
                 </View>
                 <View style={styles.travel}>
-                    <Image source={require('./../../../assets/travel.jpg')} style={styles.image} />
+                    <Image source={{uri:image}} style={styles.image} />
                     <LinearGradient colors={['#00000099',  '#00000000']} style={styles.gradient}>
                         <View style={styles.titleContainer}>
-                            <Text style={styles.title}>베트남 무계획 여행</Text>
-                            <Text style={styles.like}><Image source={require('./../../../assets/icons/like.png')} style={{width:15,height:15}}/> 122</Text>
+                            <Text style={styles.title}>{title}</Text>
+                            <Text style={styles.like}><Image source={require('./../../../assets/icons/like.png')} style={{width:15,height:15}}/> {like}</Text>
                         </View>
-                        <Text style={styles.category}>카테고리</Text>
+                        <Text style={styles.category}>{category}</Text>
                     </LinearGradient>
 
                 </View>
@@ -51,14 +72,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingRight: 10
+        paddingHorizontal: 10
 
-    },
-    profile: {
-        width: 40,
-        height: 40,
-        borderRadius: 50,
-        margin: 10
     },
     name: {
         fontSize: 14,

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, AsyncStorag
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
-import ImagePicker from 'expo-image-picker';
+import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
 
 
@@ -44,7 +44,6 @@ export default class Register extends React.Component<Props, State>{
       aspect: [1, 1],
       exif: true
     });
-
 
     if (!image.cancelled) {
         this.setState({

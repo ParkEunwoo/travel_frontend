@@ -4,7 +4,7 @@ import Header from '../../Components/Header';
 import Button from '../../Components/Button';
 import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
-import ImagePicker from 'expo-image-picker';
+import * as ImagePicker from 'expo-image-picker';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AuthSession } from 'expo';
 import axios from 'axios';
@@ -66,7 +66,7 @@ export default class ProfileEdit extends React.Component<Props, State>{
     _storeData = async () => {
         //axios 서버 통신
         const data = new FormData();
-        const {profile, name, introduct } = this.state;
+        const {profile, name, introduct, USER_ID } = this.state;
         const file = {
             uri: profile,
             type: 'image/'+profile.split('.').pop(),
@@ -75,10 +75,11 @@ export default class ProfileEdit extends React.Component<Props, State>{
         data.append('file', file);
         data.append('name', name);
         data.append('introduct', introduct);
+        data.append('user_id', USER_ID);
         const config = {
             headers: { 'content-type': 'multipart/form-data' }
         }
-        const result = await axios.post('https://pic-me-back.herokuapp.com/api/user/auth/signup', data, config);
+        const result = await axios.post('https://pic-me-back.herokuapp.com/api/user/profile', data, config);
         
         try {
             await AsyncStorage.multiSet([

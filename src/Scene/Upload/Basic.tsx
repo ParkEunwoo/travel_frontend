@@ -4,6 +4,9 @@ import Header from '../../Components/Header';
 import UploadStatus from './../../Components/UploadStatus';
 import BasicInput from './../../Components/BasicInput';
 import Button from './../../Components/Button';
+import * as Permissions from 'expo-permissions';
+import Constants from 'expo-constants';
+import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
@@ -22,6 +25,7 @@ export default class Basic extends React.Component<Props, State>{
       place: null,
       start_date: null,
       end_date: null,
+      image: null,
       category: '휴식'
     }
     static getDerivedStateFromProps(nextProps, preState){
@@ -34,6 +38,33 @@ export default class Basic extends React.Component<Props, State>{
         }
         return null;
     }
+    componentDidMount(){
+        this.getPermissionAsync();
+    }
+    getPermissionAsync = async () => {
+      if (Constants.platform.ios) {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
+    }
+    
+  _pickImage = async () => {
+    let image = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      exif: true
+    });
+
+    if (!image.cancelled) {
+        this.setState({
+            image: image.uri
+        });
+    }
+  };
+
     render(){
         return (
           <View style={styles.container}>
@@ -91,19 +122,59 @@ export default class Basic extends React.Component<Props, State>{
           </View>
         );
     }
-    _
+    
     _storeData = async () => {
         //axios 서버 통신
-        const {USER_ID, title, place, start_date, end_date, category} = this.state;
-        const data = {
-          user_id:USER_ID,
-          title,
-          place,
-          start_date,
-          end_date,
-          category
+        const data = new FormData();
+        const {profile, name, introduct, USER_ID } = this.state;
+        const file = {
+            uri: profile,
+            type: 'image/'+profile.split('.').pop(),
+            name: profile.split('/').pop().split('.')[0]
         }
-        const result = await axios.post('https://pic-me-back.herokuapp.com/api/travel', data);
+        data.append('file', file);
+        data.append('name', name);
+        data.append('introduct', introduct);
+        data.append('user_id', USER_ID);
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+        }
+        const result = await axios.post('https://pic-me-back.herokuapp.com/api/user/profile', data, config);
+        
+        try {
+            await AsyncStorage.multiSet([
+                                        ['name', result.data.name],
+                                        ['profile', result.data.profile.uri],
+                                        ['introduct', result.data.introduct]]);
+        } catch (error) {
+            console.log(error);
+            // Error saving data
+        }
+        this.props.navigation.navigate('Profile');
+    };
+
+    _storeData = async () => {
+        //axios 서버 통신
+        const data = new FormData();
+        const {USER_ID, name, title, place, start_date, end_date, category, image} = this.state;
+        const file = {
+            uri: image,
+            type: 'image/'+image.split('.').pop(),
+            name: image.split('/').pop().split('.')[0]
+        }
+        data.append('file', file);
+        data.append('name', name);
+        data.append('title', title);
+        data.append('user_id', USER_ID);
+        data.append('title', title);
+        data.append('place', place);
+        data.append('start_date', start_date);
+        data.append('end_date', end_date);
+        data.append('category', category);
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+        }
+        const result = await axios.post('https://pic-me-back.herokuapp.com/api/travel', data, config);
         
         this.props.navigation.navigate('Spot', {travel_id:result.data._id});
     };

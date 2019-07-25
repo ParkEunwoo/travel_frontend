@@ -29,7 +29,8 @@ export default class Basic extends React.Component<Props, State>{
       category: '휴식'
     }
     static getDerivedStateFromProps(nextProps, preState){
-        const {USER_ID, name} = nextProps;
+        const {USER_ID, name} = nextProps.navigation.state.params;
+        console.log(nextProps.navigation.state.params);
         if(preState.USER_ID !== USER_ID || preState.name !== name){
             return {
               USER_ID,
@@ -117,42 +118,17 @@ export default class Basic extends React.Component<Props, State>{
                         <Picker.Item label="맛집" value="맛집" />
                     </Picker>
                 </View>
+                <TouchableOpacity onPress={this._pickImage} style={styles.inputContainer}>
+                    <Image source={require('./../../../assets/icons/picture_lightblue.png')} style={styles.icon}/>
+                    <Text style={styles.input}>대표 이미지 선택</Text>
+                    <Image source={require('./../../../assets/icons/upload_lightblue.png')} style={styles.icon}/>
+                </TouchableOpacity>
             </View>
             <Button text="저장하기" action={this._storeData} />
           </View>
         );
     }
     
-    _storeData = async () => {
-        //axios 서버 통신
-        const data = new FormData();
-        const {profile, name, introduct, USER_ID } = this.state;
-        const file = {
-            uri: profile,
-            type: 'image/'+profile.split('.').pop(),
-            name: profile.split('/').pop().split('.')[0]
-        }
-        data.append('file', file);
-        data.append('name', name);
-        data.append('introduct', introduct);
-        data.append('user_id', USER_ID);
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' }
-        }
-        const result = await axios.post('https://pic-me-back.herokuapp.com/api/user/profile', data, config);
-        
-        try {
-            await AsyncStorage.multiSet([
-                                        ['name', result.data.name],
-                                        ['profile', result.data.profile.uri],
-                                        ['introduct', result.data.introduct]]);
-        } catch (error) {
-            console.log(error);
-            // Error saving data
-        }
-        this.props.navigation.navigate('Profile');
-    };
-
     _storeData = async () => {
         //axios 서버 통신
         const data = new FormData();
@@ -166,11 +142,11 @@ export default class Basic extends React.Component<Props, State>{
         data.append('name', name);
         data.append('title', title);
         data.append('user_id', USER_ID);
-        data.append('title', title);
         data.append('place', place);
         data.append('start_date', start_date);
         data.append('end_date', end_date);
         data.append('category', category);
+        console.log('data', data);
         const config = {
             headers: { 'content-type': 'multipart/form-data' }
         }

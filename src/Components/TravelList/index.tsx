@@ -6,6 +6,7 @@ import Travel from './Travel';
 
 interface Props {
     navigation: any;
+    travelList: any;
   }
 
 interface travel {
@@ -26,6 +27,7 @@ export default class TravelList extends React.Component<Props, State>{
     }
     static getDerivedStateFromProps(nextProps, preState){
         const {travelList} = nextProps;
+        console.log(travelList);
         if(preState.travelList !== travelList){
             return {
                 travelList
@@ -34,9 +36,9 @@ export default class TravelList extends React.Component<Props, State>{
         return null;
     }
     render(){
-        const travels = this.state.travelList?this.state.travelList.map((value, index) => `
-            <Travel key=${index} name=${value.name} time=${value.time} title=${value.title} like=${value.like} category=${value.category} image=${value.image} />
-        `):null;
+        const travels = this.state.travelList?this.state.travelList.map((value, index) => 
+            <Travel style={styles.travel} key={index} name={value.name} time={value.time} title={value.title} like={value.like} category={value.category} image={value.image} />
+        ):null;
         return (
             <View style={styles.container}>
                 {travels&&travels}
@@ -54,5 +56,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'space-around',
         padding: 10,
+    },
+    travel: {
     }
 });

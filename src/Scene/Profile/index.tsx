@@ -6,6 +6,7 @@ import Dashboard from './../../Components/Dashboard';
 import Category from './../../Components/Category';
 import FollowButton from './../../Components/FollowButton';
 import TravelList from './../../Components/TravelList';
+import axios from 'axios';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -20,7 +21,8 @@ export default class Profile extends React.Component<Props, State>{
       USER_ID: null,
       name: null,
       profile:null,
-      introduct: null
+      introduct: null,
+      travelList: null
     }
     async componentWillMount(){
       await AsyncStorage.multiGet(['USER_ID', 'name', 'profile', 'introduct'], (err, stores) => {
@@ -33,21 +35,37 @@ export default class Profile extends React.Component<Props, State>{
               })
           });
       });
+      
+      const result = await axios.get('https://pic-me-back.herokuapp.com/api/travel/'+this.state.USER_ID);
+      console.log(result.data);
+      const travelList = result.data.map((value)=>{
+        return {
+          name: value.name,
+          time: value.register_date,
+          like: value.like.length,
+          title: value.title,
+          category: value.category,
+          image: value.image.uri
+        }
+      });
+      console.log(travelList);
+      this.setState({
+        travelList
+      })
     }
     render(){
       const {name, profile, introduct} = this.state;
         return (
           <View style={styles.container}>
               <Header title="마이페이지" />
-              <TouchableOpacity style={styles.upload}>
+              <TouchableOpacity style={styles.upload} onPress={()=>this.props.navigation.navigate('Basic', {USER_ID:this.state.USER_ID, name: this.state.name})}>
                 <Image source={require('./../../../assets/icons/upload.png')} style={{width:24, height:24}}/>
               </TouchableOpacity>
               <ScrollView style={styles.wrapper}>
               <UserInfo name={name} profile={profile} introduct={introduct} />
               <FollowButton />
               <Dashboard />
-                <Category />
-                <TravelList />
+                <TravelList travelList={this.state.travelList}/>
               </ScrollView>
           </View>
         );

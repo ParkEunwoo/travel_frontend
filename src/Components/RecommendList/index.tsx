@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#5966FF',
-        fontSize: 20
+        fontSize: 19,
     }
 });

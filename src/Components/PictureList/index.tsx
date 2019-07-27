@@ -9,14 +9,27 @@ interface Props {
 interface State {}
   
 export default class PictureList extends React.Component<Props, State>{
+    state = {
+        images: []
+    }
+    static getDerivedStateFromProps(nextProps, preState){
+        const {images} = nextProps;
+        console.log("----------");
+        console.log(images);
+        if(preState.images !== images){
+            return {
+                images
+            };
+        }
+        return null;
+    }
     render(){
+        const images = this.state.images.map((value, key)=>
+                <Image source={{uri:value}} key={key} style={{width:100,height:100}}/>)
+        console.log(images);
         return (
             <ScrollView style={styles.container} showsVerticalScrollIndicator={false} >
-            <Image source={require('./../../../assets/travel.jpg')} ></Image>
-                <Image source={require('./../../../assets/travel.jpg')} ></Image>
-                <Image source={require('./../../../assets/travel.jpg')} ></Image>
-                <Image source={require('./../../../assets/travel.jpg')} ></Image>
-                <Image source={require('./../../../assets/travel.jpg')} ></Image>
+                {images && images}
             </ScrollView>
         );
     }

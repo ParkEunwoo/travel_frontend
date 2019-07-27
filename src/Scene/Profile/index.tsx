@@ -23,24 +23,26 @@ export default class Profile extends React.Component<Props, State>{
       profile:null,
       introduct: null,
       travelList: null,
+      logs:null,
+      followers: null,
+      following: null,
       owner: null
     }
     async componentDidMount(){
-      await AsyncStorage.multiGet(['USER_ID', 'name', 'profile', 'introduct'], (err, stores) => {
-          stores.map((result, i, store) => {
-              // get at each store's key/value so you can work with it
-              let key = store[i][0];
-              let value = store[i][1];
-              this.setState({
-                  [key]: value
-              })
-          });
-      });
-      
-      const result = await axios.get('https://pic-me-back.herokuapp.com/api/travel/'+this.state.USER_ID);
+      const USER_ID = await AsyncStorage.getItem('USER_ID');
+      this.setState({USER_ID});
+      const user = await axios.get('https://pic-me-back.herokuapp.com/api/user/'+this.state.owner);
+      this.setState({
+        name: user.data.name,
+        profile: user.data.profile.uri,
+        introduct: user.data.introduct,
+        followers: user.data.friends
+      })
+      const result = await axios.get('https://pic-me-back.herokuapp.com/api/travel/list/'+USER_ID);
       
       const travelList = result.data.map((value)=>{
         return {
+          travel_id: value._id,
           name: value.name,
           time: value.register_date,
           like: value.like.length,
@@ -51,7 +53,8 @@ export default class Profile extends React.Component<Props, State>{
       });
       
       this.setState({
-        travelList
+        travelList,
+        logs: travelList.length
       })
     }
     static getDerivedStateFromProps(nextProps, preState){
@@ -64,7 +67,7 @@ export default class Profile extends React.Component<Props, State>{
         return null;
     }
     render(){
-      const {name, profile, introduct, owner, USER_ID} = this.state;
+      const {name, profile, introduct, owner, USER_ID, logs, followers} = this.state;
         return (
           <View style={styles.container}>
               <Header title="마이페이지" />
@@ -74,7 +77,7 @@ export default class Profile extends React.Component<Props, State>{
               <ScrollView style={styles.wrapper}>
               <UserInfo name={name} profile={profile} introduct={introduct} />
               {owner!==USER_ID && <FollowButton />}
-              <Dashboard />
+              <Dashboard logs={logs} followers={followers}/>
                 <TravelList travelList={this.state.travelList}/>
               </ScrollView>
           </View>

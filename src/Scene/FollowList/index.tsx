@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 import Header from '../../Components/Header';
 import SearchFriend from '../../Components/SearchFriend';
 import FriendList from '../../Components/FriendList';
@@ -15,12 +15,24 @@ interface Props {
 interface State {}
   
 export default class FollowList extends React.Component<Props, State>{
+    state = {
+        followers: null
+    }
+    async componentDidMount(){
+        const user_id = await AsyncStorage.getItem('USER_ID');
+        const result = axios.get('https://pic-me-back.herokuapp.com/api/user/'+user_id+'/friends');
+        this.setState({
+            followers: result.data
+        });
+        console.log("------------------------------------")
+        console.log(this.state.followers);
+    }
     render(){
         return (
             <View style={styles.container}>
                 <Header />
                 <SearchFriend />
-                <FriendList />
+                <FriendList followers={this.state.followers}/>
             </View>
         );
     }

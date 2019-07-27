@@ -58,10 +58,26 @@ export default class Detail extends React.Component<Props, State>{
       exif: true
     });
     console.log(image);
-    if (!image.cancelled) { 
+    if (!image.cancelled) {
+      this.setState({
+        images: [
+          ...this.state.images,
+          image.uri
+        ]
+      });
+      if(image.exif && !this.state.time){
+        const time = image.exif.DateTime;
         this.setState({
-            image: image.uri
+          time
         });
+      }
+      if(image.exif.GPSLatitude && !this.state.latitude){
+        this.setState({
+          latitude: image.exif.GPSLatitude,
+          longitude: image.exif.GPSLongitude
+        })
+      }
+      console.log(this.state);
     }
   };
     render(){
@@ -70,14 +86,14 @@ export default class Detail extends React.Component<Props, State>{
               <Header title="일지 업로드" />
             <UploadStatus/>
             <View style={styles.wrapper} >
-              <PictureList />
+              <PictureList images={this.state.images}/>
             <View style={styles.detailInput}>
-              <View style={styles.inputContainer}>
-                <TouchableOpacity style={styles.addButton} onPress={}>
-                      <Text style={styles.add}>사진 추가</Text>
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.addButton} onPress={this._pickImage}>
+                    <Text style={styles.add}>사진 추가</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.deleteButton} onPress={}>
-                      <Text style={styles.delete}>사진 삭제</Text>
+                  <TouchableOpacity style={styles.deleteButton}>
+                    <Text style={styles.delete}>사진 삭제</Text>
                   </TouchableOpacity>
               </View>
                 <View style={styles.inputContainer}>
@@ -112,13 +128,39 @@ export default class Detail extends React.Component<Props, State>{
                 </View>
             </View>
             </View>
-            <Button text="저장하기" action={()=>this.props.navigation.navigate('Profile', {owner:this.state.user_id})} />
+            <Button text="저장하기" action={()=>{
+              this._storeData();
+              this.props.navigation.navigate('Profile', {owner:this.state.user_id})}} />
           </View>
         );
     }
-    _back = () => {
-        this.props.navigation.navigate('Auth');
-    }
+    
+    _storeData = async () => {
+      //axios 서버 통신
+      const data = new FormData();
+      const {travel_id, user_id, title, content, time, latitude, longitude, images} = this.state;
+      images.forEach((value) => {
+        const files = {
+            uri: value,
+            type: 'image/'+value.split('.').pop(),
+            name: value.split('/').pop().split('.')[0]
+        }
+        data.append('files', files);
+      })
+      data.append('title', title);
+      data.append('user_id', user_id);
+      data.append('time', time);
+      data.append('latitude', latitude);
+      data.append('longitude', longitude);
+      data.append('content', content);
+      console.log('data', data);
+      const config = {
+          headers: { 'content-type': 'multipart/form-data' }
+      }
+      const result = await axios.post('https://pic-me-back.herokuapp.com/api/travel/spot/'+travel_id, data, config);
+      
+      this.props.navigation.navigate('Spot', {travel_id:result.data._id});
+  };
 }
 
 const styles = StyleSheet.create({
@@ -193,19 +235,34 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderColor: "#ABB2FF",
   },
+  buttonContainer: {
+      flexDirection: 'row',
+      alignSelf: 'stretch',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 10,
+      marginTop: 8,
+  },
   addButton: {
+    paddingVertical: 4,
+    paddingHorizontal: 10,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: '#5966FF'
+    borderColor: '#5966FF',
+    marginHorizontal: 10
   },
   add: {
     color: '#5966FF',
     fontSize: 10
   },
   deleteButton: {
+    paddingVertical: 4,
+    paddingHorizontal: 10,
     borderRadius: 4,
     borderWidth: 1,
-    backgroundColor: '#ED5369'
+    backgroundColor: '#ED5369',
+    borderColor: '#ED5369',
+    marginHorizontal: 10
   },
   delete: {
     color: 'white',

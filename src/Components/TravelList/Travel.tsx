@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button, Image, ImageBackground } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import axios from 'axios';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
 
@@ -37,7 +38,7 @@ export default class Travel extends React.Component<Props, State>{
     render(){
         const {name, time, title, category, like, image} = this.state;
         return (
-            <TouchableOpacity style={styles.container}>
+            <TouchableOpacity style={styles.container} onPress={this._showDetail}>
                 <View style={styles.userInfo}>
                     <Text style={styles.name}>{name}</Text>
                     <Text style={styles.time}>{time}</Text>
@@ -58,6 +59,9 @@ export default class Travel extends React.Component<Props, State>{
     }
     _back = () => {
         this.props.navigation.navigate('Auth');
+    }
+    _showDetail = () => {
+        
     }
 }
 

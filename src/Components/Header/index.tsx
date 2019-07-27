@@ -59,20 +59,19 @@ class Header extends React.Component<Props, State>{
         if(this.state.title=='logo'){
             this.props.navigation.navigate('Profile', {owner:this.state.USER_ID});
         }
+        else {
+            this.props.navigation.navigate('Main');
+        }
+    }
+    _rightWork = () => {
+        if(this.state.title=='logo'){
+            
+        }
         else if(this.state.title=='마이페이지'){
             this.props.navigation.navigate('ProfileEdit');
         }
         else {
-            console.log(this.props.navigation.goBack)
-            this.props.navigation.actions.goBack();
-        }
-    }
-    _rightWork = () => {
-        if(this.state.title=='마이페이지'){
-            this.props.navigation.navigate('ProfileEdit');
-        }
-        else {
-            this.props.navigation.goBack(null);
+            this.props.navigation.navigate('Main');
         }
     }
 }

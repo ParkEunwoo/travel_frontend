@@ -10,18 +10,24 @@ interface Props {
 interface State {}
   
 export default class FriendList extends React.Component<Props, State>{
+    state = {
+        followers: []
+    }
+    static getDerivedStateFromProps(nextProps, preState){
+        const {followers} = nextProps;
+        if(preState.followers !== followers){
+            return {
+                followers
+            };
+        }
+        return null;
+    }
     render(){
+        const friends = this.followers?this.state.followers.map(value=><Friend key={value._id} name={value.name} profile={value.profile.uri} introduct={value.introduct} />)
+        :null;
         return (
             <ScrollView style={styles.container} showsVerticalScrollIndicator={false} >
-            <Friend></Friend>
-                <Friend></Friend>
-                <Friend></Friend>
-                <Friend></Friend>
-                <Friend></Friend>
-                <Friend></Friend>
-                <Friend></Friend>
-                <Friend></Friend>
-                <Friend></Friend>
+                {friends&&friends}
             </ScrollView>
         );
     }

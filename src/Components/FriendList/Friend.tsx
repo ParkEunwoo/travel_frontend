@@ -12,10 +12,10 @@ export default class Friend extends React.Component<Props, State>{
     render(){
         return (
             <View style={styles.container}>
-                <Image source={require('./../../../assets/icons/mainprofile.png')} style={styles.profile} />
+                <Image source={{uri:this.props.profile}} style={styles.profile} />
                 <View style={styles.wrapper}>
-                    <Text style={styles.name}>이름</Text>
-                    <Text style={styles.introduct}>자기소개</Text>
+                    <Text style={styles.name}>{this.props.name}</Text>
+                    <Text style={styles.introduct}>{this.props.introduct}</Text>
                 </View>
             </View>
         );

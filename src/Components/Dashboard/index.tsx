@@ -42,7 +42,7 @@ class Dashboard extends React.Component<Props, State>{
                 <Text style={styles.text}>FOLLOWERS</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.wrapper}>
-                <Text style={styles.number}>83</Text>
+                <Text style={styles.number}>0</Text>
                 <Text style={styles.text}>FOLLOWING</Text>
             </TouchableOpacity>
           </View>

@@ -10,12 +10,25 @@ interface State {}
   
 export default class FollowButton extends React.Component<Props, State>{
     state = {
+        owner: null,
+        user_id: null
     };
+    
+    static getDerivedStateFromProps(nextProps, preState){
+        const {owner, user_id} = nextProps;
+        if(preState.owner !== owner || preState.user_id !== user_id){
+            return {
+                owner,
+                user_id,
+            };
+        }
+        return null;
+    }
 
     render(){
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={axios.post('https://pic-me-back.herokuapp.com/api/user/friends',{user_id:this.state.user_id,friend_id:this.state.owner})}>
                     <Text style={styles.text}>FOLLOW</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button, styles.un]}>

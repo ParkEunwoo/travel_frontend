@@ -13,18 +13,14 @@ interface State {}
 class Dashboard extends React.Component<Props, State>{
     state = {
         logs:null,
-        followrs: null,
-        num: 0
+        followrs: []
     }
     static getDerivedStateFromProps(nextProps, preState){
         const {logs, followers} = nextProps;
         if(preState.logs !== logs || preState.followers !== followers){
-            let num = 0;
-            if(followers) num = followers.length;
             return {
                 logs,
-                followers,
-                num
+                followers
             };
         }
         return null;
@@ -38,7 +34,7 @@ class Dashboard extends React.Component<Props, State>{
             </TouchableOpacity>
             <TouchableOpacity style={styles.wrapper} onPress={()=>this.props.navigation.navigate('FollowList')} >
                 <View style={styles.divide} />
-                <Text style={styles.number}>{this.state.num}</Text>
+                <Text style={styles.number}>{this.state.followers.length}</Text>
                 <Text style={styles.text}>FOLLOWERS</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.wrapper}>

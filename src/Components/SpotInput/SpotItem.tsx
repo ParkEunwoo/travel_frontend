@@ -9,10 +9,22 @@ interface Props {
 interface State {}
   
 export default class SpotItem extends React.Component<Props, State>{
+    state = {
+        title: null
+    }
+    static getDerivedStateFromProps(nextProps, preState){
+        const { title } = nextProps;
+        if(preState.title !== title){
+            return {
+              title
+            };
+        }
+        return null;
+    }
     render(){
         return (
             <TouchableOpacity style={styles.container}>
-                <Text style={styles.text}>오사카 도톤보리</Text>
+                <Text style={styles.text}>{this.state.title}</Text>
                 <Image source={require('./../../../assets/icons/pen_gray.png')} style={styles.edit} />
             </TouchableOpacity>
         );

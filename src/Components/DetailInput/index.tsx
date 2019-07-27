@@ -14,7 +14,7 @@ export default class DetailInput extends React.Component<Props, State>{
 
     render(){
         return (
-            <View style={styles.container}>
+            <View style={styles.detailInput}>
                 <View style={styles.inputContainer}>
                     <Image source={require('./../../../assets/icons/location_lightblue.png')} style={styles.icon}/>
                     <TextInput
@@ -50,7 +50,7 @@ export default class DetailInput extends React.Component<Props, State>{
 }
 
 const styles = StyleSheet.create({
-    container: {
+    detailInput: {
         flex: 3,
         backgroundColor: '#fff',
         alignItems: 'center',

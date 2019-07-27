@@ -22,12 +22,6 @@ export default class Travel extends React.Component<Props, State>{
     
     static getDerivedStateFromProps(nextProps, preState){
         const {name, time, title, category, like, image} = nextProps;
-        console.log('name', name);
-        console.log('time', time);
-        console.log('title', title);
-        console.log('category', category);
-        console.log('like', like);
-        console.log('image', image);
         if(preState.name !== name || preState.time !== time || preState.title !== title || preState.category !== category || preState.like !== like || preState.image !== image){
             return {
               name,

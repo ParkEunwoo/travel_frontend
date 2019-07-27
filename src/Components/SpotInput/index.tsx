@@ -10,13 +10,26 @@ interface Props {
 interface State {}
   
 export default class SpotInput extends React.Component<Props, State>{
+    state = {
+        spotList: []
+    }
+    static getDerivedStateFromProps(nextProps, preState){
+        const {spotList} = nextProps;
+        console.log(spotList);
+        if(preState.spotList !== spotList){
+            return {
+                spotList
+            };
+        }
+        return null;
+    }
     render(){
+        const spots = this.state.spotList?this.state.spotList.map(value => 
+            <SpotItem style={styles.spot} key={value._id} title={value.title} />
+        ):null;
         return (
-            <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-                <SpotItem />
-                <SpotItem />
-                <SpotItem />
-                <SpotItem />
+            <ScrollView style={styles.spotInput} showsVerticalScrollIndicator={false}>
+                {spots&& spots}
             </ScrollView>
         );
     }
@@ -24,8 +37,9 @@ export default class SpotInput extends React.Component<Props, State>{
 }
 
 const styles = StyleSheet.create({
-    container: {
+    spotInput: {
         flex: 1,
         alignSelf: 'stretch',
     },
+    spot: {}
 });

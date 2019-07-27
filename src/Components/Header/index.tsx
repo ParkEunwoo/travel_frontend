@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Image, TouchableHighlight, TouchableHighlightBase } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Image, TouchableHighlight, AsyncStorage } from 'react-native';
 import { withNavigation } from 'react-navigation';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
@@ -15,9 +15,18 @@ class Header extends React.Component<Props, State>{
     state = {
         title: '',
         left_icon: null,
-        right_icon: null
+        right_icon: null,
+        USER_ID: null
     }
-    componentDidMount(){
+    async componentDidMount(){
+        const value = await AsyncStorage.getItem('USER_ID');
+        if (value !== null) {
+        // We have data!!
+            console.log(value);
+            this.setState({
+                USER_ID : value
+            })
+        }
         let { title } = this.props;
         let left_icon = require('./../../../assets/icons/back_blue.png');
         let right_icon = require('./../../../assets/icons/quit_blue.png');
@@ -48,7 +57,7 @@ class Header extends React.Component<Props, State>{
     }
     _leftWork = () => {
         if(this.state.title=='logo'){
-            this.props.navigation.navigate('Profile');
+            this.props.navigation.navigate('Profile', {owner:this.state.USER_ID});
         }
         else if(this.state.title=='마이페이지'){
             this.props.navigation.navigate('ProfileEdit');

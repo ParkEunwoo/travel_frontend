@@ -22,9 +22,10 @@ export default class Profile extends React.Component<Props, State>{
       name: null,
       profile:null,
       introduct: null,
-      travelList: null
+      travelList: null,
+      owner: null
     }
-    async componentWillMount(){
+    async componentDidMount(){
       await AsyncStorage.multiGet(['USER_ID', 'name', 'profile', 'introduct'], (err, stores) => {
           stores.map((result, i, store) => {
               // get at each store's key/value so you can work with it
@@ -37,7 +38,7 @@ export default class Profile extends React.Component<Props, State>{
       });
       
       const result = await axios.get('https://pic-me-back.herokuapp.com/api/travel/'+this.state.USER_ID);
-      console.log(result.data);
+      
       const travelList = result.data.map((value)=>{
         return {
           name: value.name,
@@ -48,13 +49,22 @@ export default class Profile extends React.Component<Props, State>{
           image: value.image.uri
         }
       });
-      console.log(travelList);
+      
       this.setState({
         travelList
       })
     }
+    static getDerivedStateFromProps(nextProps, preState){
+        const {owner} = nextProps.navigation.state.params;
+        if(preState.owner !== owner){
+            return {
+                owner
+            };
+        }
+        return null;
+    }
     render(){
-      const {name, profile, introduct} = this.state;
+      const {name, profile, introduct, owner, USER_ID} = this.state;
         return (
           <View style={styles.container}>
               <Header title="마이페이지" />
@@ -63,7 +73,7 @@ export default class Profile extends React.Component<Props, State>{
               </TouchableOpacity>
               <ScrollView style={styles.wrapper}>
               <UserInfo name={name} profile={profile} introduct={introduct} />
-              <FollowButton />
+              {owner!==USER_ID && <FollowButton />}
               <Dashboard />
                 <TravelList travelList={this.state.travelList}/>
               </ScrollView>

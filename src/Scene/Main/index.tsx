@@ -20,7 +20,7 @@ export default class Main extends React.Component<Props, State>{
       name:null,
       travelList: null
     }
-    async componentWillMount(){
+    async componentDidMount(){
       await AsyncStorage.multiGet(['USER_ID', 'name'], (err, stores) => {
           stores.map((result, i, store) => {
               // get at each store's key/value so you can work with it
@@ -31,7 +31,6 @@ export default class Main extends React.Component<Props, State>{
               })
           });
       });
-
       const result = await axios.get('https://pic-me-back.herokuapp.com/api/user/'+this.state.USER_ID+'/friends/travel');
       
       console.log(result.data);

@@ -17,11 +17,19 @@ interface State {}
   
 export default class Spot extends React.Component<Props, State>{
     state = {
+      spotList: null,
+      title: '',
+      travel_id: null
     }
     async componentDidMount(){
-      const {travel_id} = this.props;
+      const {travel_id} = this.props.navigation.state.params;
+      console.log(travel_id);
       const result = await axios.get('https://pic-me-back.herokuapp.com/api/travel/'+travel_id);
       console.log(result);
+      this.setState({
+        spotList:result.data,
+        travel_id
+      })
     }
     render(){
         return (
@@ -29,11 +37,12 @@ export default class Spot extends React.Component<Props, State>{
               <Header title="일지 업로드" />
             <UploadStatus/>
                 <View style={styles.wrapper}>
-                    <TextInput style={styles.input} placeholder="장소를 입력해주세요."></TextInput>
+                    <TextInput style={styles.input} placeholder="장소를 입력해주세요." 
+                    onChangeText={(title) => this.setState({title})}></TextInput>
                     <Image source={require('./../../../assets/icons/quit_blue.png')} style={styles.icon} />
                 </View>
-            <SpotInput />
-            <Button text="다음" action={()=>this.props.navigation.navigate('Detail')} />
+            <SpotInput spotList={this.state.spotList}/>
+            <Button text="다음" action={()=>this.props.navigation.navigate('Detail', {title: this.state.title, travel_id: this.state.travel_id})} />
           </View>
         );
     }

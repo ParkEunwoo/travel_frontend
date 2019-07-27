@@ -19,10 +19,44 @@ export default class Auth extends React.Component<Props, State>{
     state = {
         result: null,
         token: null,
-        info: null
+        info: null,
+        USER_ID: null
     };
-    componentDidMount(){
-        axios.get('https://pic-me-back.herokuapp.com/');
+    _setData = async () => {
+      try {
+        await AsyncStorage.multiSet([['USER_ID', '5d3b9a5f2eda6c0004b61bd8'],
+                                    ['TOKEN', 'AAAAOqTOnv3G6a-seRiWI0tm__r-KHjkTjbsaJqJR9QSWaT1VZhuvFqre0FH8qOlT5qywx2FysVbrycTfO24DA9CUfo'],
+                                    ['name', '박은우'],
+                                    ['profile', 'https://ssl.pstatic.net/static/pwe/address/img_profile.png'],
+                                    ['introduct', '안녕하세요']]);
+      } catch (error) {
+          console.log(error);
+        // Error saving data
+      }
+      this._retrieveData();
+    }
+    
+    
+    _retrieveData = async () => {
+        try {
+          const value = await AsyncStorage.getItem('USER_ID');
+          if (value !== null) {
+            // We have data!!
+            console.log(value);
+            this.setState({
+              USER_ID : value
+            })
+          }
+        } catch (error) {
+          // Error retrieving data
+        }
+        if(this.state.USER_ID){
+            this.props.navigation.navigate('Main');
+        }
+      };
+    componentWillMount(){
+        this._setData();
+
     }
     render(){
         return (

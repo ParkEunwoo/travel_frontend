@@ -14,23 +14,6 @@ import FollowList from './FollowList';
 import Map from './Map';
 import LogView from './LogView';
 
-const state = {
-    USER_ID: ''
-}
-
-const _retrieveData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('USER_ID');
-      if (value !== null) {
-        // We have data!!
-        console.log(value);
-        state.USER_ID = value;
-      }
-    } catch (error) {
-      // Error retrieving data
-    }
-  };
-_retrieveData();
 export default createAppContainer(
     createSwitchNavigator({
         Auth,
@@ -46,6 +29,6 @@ export default createAppContainer(
         LogView
     },
     {
-        initialRouteName: (!state.USER_ID?'Auth':'Main'),
+        initialRouteName: ('Auth'),
     })
 );

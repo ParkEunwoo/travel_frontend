@@ -9,13 +9,27 @@ interface Props {
 interface State {}
   
 export default class ProfileInfo extends React.Component<Props, State>{
+    state = {
+        like: [],
+        name: null,
+    }
+    static getDerivedStateFromProps(nextProps, preState){
+        const {like, name} = nextProps;
+        if(preState.name !== name || preState.like !== like){
+            return {
+                name,
+                like
+            };
+        }
+        return null;
+    }
     render(){
         return (
             <View style={styles.container}>
                 <Image source={require('./../../../assets/icons/mainprofile.png')} style={styles.profile} />
-                <Text style={styles.name}>이름</Text>
+                <Text style={styles.name}>{this.state.name}</Text>
                 <Image source={require('./../../../assets/icons/like_red.png')} style={styles.icon}/>
-                <Text style={styles.like}>122</Text>
+                <Text style={styles.like}>{this.state.like.length}</Text>
             </View>
         );
     }

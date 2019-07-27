@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button, Image, ImageBackground } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { withNavigation } from 'react-navigation';
 import axios from 'axios';
 //https://docs.expo.io/versions/latest/sdk/imagepicker/
 
@@ -11,26 +12,33 @@ interface Props {
 
 interface State {}
   
-export default class Travel extends React.Component<Props, State>{
+class Travel extends React.Component<Props, State>{
     state = {
+        travel_id: '',
         name: '',
         time: '',
         title: '',
         category: '',
         like: 0,
+        start_date: '',
+        end_date: '',
         image: null
     }
     
     static getDerivedStateFromProps(nextProps, preState){
-        const {name, time, title, category, like, image} = nextProps;
-        if(preState.name !== name || preState.time !== time || preState.title !== title || preState.category !== category || preState.like !== like || preState.image !== image){
+        const {name, time, title, category, like, image, start_date, end_date, travel_id} = nextProps;
+        
+        if(preState.travel_id !== travel_id || preState.name !== name || preState.time !== time || preState.title !== title || preState.category !== category || preState.like !== like || preState.image !== image || preState.start_date !== start_date || preState.end_date !== end_date){
             return {
+                travel_id,
               name,
               time,
               title,
               category,
               like,
-              image
+              image,
+              start_date,
+              end_date
             };
         }
         return null;
@@ -38,7 +46,7 @@ export default class Travel extends React.Component<Props, State>{
     render(){
         const {name, time, title, category, like, image} = this.state;
         return (
-            <TouchableOpacity style={styles.container} onPress={this._showDetail}>
+            <TouchableOpacity style={styles.container} onPress={()=>this._showDetail()}>
                 <View style={styles.userInfo}>
                     <Text style={styles.name}>{name}</Text>
                     <Text style={styles.time}>{time}</Text>
@@ -61,7 +69,17 @@ export default class Travel extends React.Component<Props, State>{
         this.props.navigation.navigate('Auth');
     }
     _showDetail = () => {
-        
+        console.log('------------------------------------------------')
+        console.log(this.state);
+        const { name, like, title, start_date, end_date, travel_id } = this.state;
+        this.props.navigation.navigate('Map', {
+            name,
+            like,
+            title,
+            start_date,
+            end_date,
+            travel_id
+        });
     }
 }
 
@@ -125,3 +143,6 @@ const styles = StyleSheet.create({
         paddingBottom: 50
     }
 });
+
+
+export default withNavigation(Travel);

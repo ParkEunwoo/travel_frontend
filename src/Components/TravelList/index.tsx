@@ -27,7 +27,8 @@ export default class TravelList extends React.Component<Props, State>{
     }
     static getDerivedStateFromProps(nextProps, preState){
         const {travelList} = nextProps;
-        console.log(travelList);
+        
+
         if(preState.travelList !== travelList){
             return {
                 travelList
@@ -36,8 +37,11 @@ export default class TravelList extends React.Component<Props, State>{
         return null;
     }
     render(){
-        const travels = this.state.travelList?this.state.travelList.map((value) => 
-            <Travel style={styles.travel} key={value.travel_id} name={value.name} time={value.time} title={value.title} like={value.like} category={value.category} image={value.image} />
+        const travels = this.state.travelList?this.state.travelList.map((value, index) => 
+            <Travel style={styles.travel} key={index} travel_id={value._id} name={value.name} 
+            time={value.time} title={value.title} like={value.like} 
+            category={value.category} image={value.image.uri} 
+            start_date={value.start_date} end_date={value.end_date}/>
         ):null;
         return (
             <View style={styles.container}>

@@ -18,7 +18,7 @@ export default class Main extends React.Component<Props, State>{
     state = {
       USER_ID:null,
       name:null,
-      travelList: null
+      travelList: []
     }
     async componentDidMount(){
       await AsyncStorage.multiGet(['USER_ID', 'name'], (err, stores) => {
@@ -34,19 +34,8 @@ export default class Main extends React.Component<Props, State>{
       const result = await axios.get('https://pic-me-back.herokuapp.com/api/user/'+this.state.USER_ID+'/friends/travel');
       console.log('main')
       console.log(result.data);
-      const travelList = result.data.map((value)=>{
-        return {
-          travel_id: value._id,
-          name: value.name,
-          time: value.register_date,
-          like: value.like.length,
-          title: value.title,
-          category: value.category,
-          image: value.image.uri
-        }
-      });
       this.setState({
-        travelList
+        travelList: result.data
       })
     }
     render(){

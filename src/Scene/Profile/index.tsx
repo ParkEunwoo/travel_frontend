@@ -22,9 +22,9 @@ export default class Profile extends React.Component<Props, State>{
       name: null,
       profile:null,
       introduct: null,
-      travelList: null,
+      travelList: [],
       logs:null,
-      followers: null,
+      followers: [],
       following: null,
       owner: null
     }
@@ -40,21 +40,9 @@ export default class Profile extends React.Component<Props, State>{
       })
       const result = await axios.get('https://pic-me-back.herokuapp.com/api/travel/list/'+USER_ID);
       
-      const travelList = result.data.map((value)=>{
-        return {
-          travel_id: value._id,
-          name: value.name,
-          time: value.register_date,
-          like: value.like.length,
-          title: value.title,
-          category: value.category,
-          image: value.image.uri
-        }
-      });
-      
+      console.log(result.data);
       this.setState({
-        travelList,
-        logs: travelList.length
+        travelList: result.data
       })
     }
     static getDerivedStateFromProps(nextProps, preState){
@@ -77,8 +65,8 @@ export default class Profile extends React.Component<Props, State>{
               <ScrollView style={styles.wrapper}>
               <UserInfo name={name} profile={profile} introduct={introduct} />
               {owner!==USER_ID && <FollowButton />}
-              <Dashboard logs={logs} followers={followers}/>
-                <TravelList travelList={this.state.travelList}/>
+              <Dashboard logs={this.state.travelList.length} followers={followers}/>
+                {this.state.travelList&&<TravelList travelList={this.state.travelList}/>}
               </ScrollView>
           </View>
         );

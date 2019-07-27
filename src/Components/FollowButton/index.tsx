@@ -28,7 +28,7 @@ export default class FollowButton extends React.Component<Props, State>{
     render(){
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.button} onPress={axios.post('https://pic-me-back.herokuapp.com/api/user/friends',{user_id:this.state.user_id,friend_id:this.state.owner})}>
+                <TouchableOpacity style={styles.button} onPress={()=>axios.post('https://pic-me-back.herokuapp.com/api/user/friends',{user_id:this.state.user_id,friend_id:this.state.owner})}>
                     <Text style={styles.text}>FOLLOW</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button, styles.un]}>

@@ -1,24 +1,44 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
 import axios from 'axios';
+import { withNavigation } from 'react-navigation';
 
 interface Props {
     navigation: any;
   }
 
 interface State {}
-  
-export default class TravelInfo extends React.Component<Props, State>{
+
+class TravelInfo extends React.Component<Props, State>{
+    state = {
+        title: '',
+        start_date: '',
+        end_date: '',
+        travel_id: ''
+    }
+    static getDerivedStateFromProps(nextProps, preState){
+        const {start_date, end_date, title, travel_id} = nextProps;
+        
+        if(preState.travel_id !== travel_id || preState.start_date !== start_date || preState.end_date !== end_date || preState.title !== title){
+            return {
+                travel_id,
+                start_date,
+                end_date,
+                title
+            };
+        }
+        return null;
+    }
     render(){
         return (
             <View style={styles.container}>
                 <View style={styles.wrapper}>
-                    <Text style={styles.title}>오사카 3박 4일 먹방투어</Text>
-                    <Text style={styles.range}>19/03/22 ~ 19/03/25</Text>
+                    <Text style={styles.title}>{this.state.title}</Text>
+                    <Text style={styles.range}>{this.state.start_date} ~ {this.state.end_date}</Text>
                 </View>
-                <View style={styles.button}>
-                    <Image source={require('./../../../assets/icons/start_lightblue.png')} style={styles.icon} />
-                </View>
+                <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('LogView', {travel_id:this.state.travel_id})}>
+                    <Image source={require('./../../../assets/icons/forward.png')} style={styles.icon} />
+                </TouchableOpacity>
             </View>
         );
     }
@@ -65,3 +85,5 @@ const styles = StyleSheet.create({
         fontSize: 15
     }
 });
+
+export default withNavigation(TravelInfo);

@@ -15,7 +15,7 @@ export default class SpotInput extends React.Component<Props, State>{
     }
     static getDerivedStateFromProps(nextProps, preState){
         const {spotList} = nextProps;
-        console.log(spotList);
+        
         if(preState.spotList !== spotList){
             return {
                 spotList

@@ -20,9 +20,13 @@ export default class FollowList extends React.Component<Props, State>{
     }
     async componentDidMount(){
         const user_id = await AsyncStorage.getItem('USER_ID');
-        const result = axios.get('https://pic-me-back.herokuapp.com/api/user/'+user_id+'/friends');
+        console.log('-------------------followlist-------------------')
+        console.log(user_id);
+        const result = await axios.get('https://pic-me-back.herokuapp.com/api/user/'+user_id+'/friends');
+
+        console.log(result);
         this.setState({
-            followers: result.data
+            followers: result.data.friends
         });
         console.log("------------------------------------")
         console.log(this.state.followers);

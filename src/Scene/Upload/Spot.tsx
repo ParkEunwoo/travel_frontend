@@ -23,9 +23,11 @@ export default class Spot extends React.Component<Props, State>{
     }
     async componentDidMount(){
       const {travel_id} = this.props.navigation.state.params;
-      console.log(travel_id);
+      console.log("*****************Spot*************************");
+      console.log('travel_id',travel_id);
       const result = await axios.get('https://pic-me-back.herokuapp.com/api/travel/'+travel_id);
-      console.log(result);
+      console.log("*******************************************")
+      console.log(result.data);
       this.setState({
         spotList:result.data,
         travel_id
@@ -45,9 +47,6 @@ export default class Spot extends React.Component<Props, State>{
             <Button text="다음" action={()=>this.props.navigation.navigate('Detail', {title: this.state.title, travel_id: this.state.travel_id})} />
           </View>
         );
-    }
-    _back = () => {
-        this.props.navigation.navigate('Auth');
     }
 }
 

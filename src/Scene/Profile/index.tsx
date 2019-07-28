@@ -30,18 +30,19 @@ export default class Profile extends React.Component<Props, State>{
     }
     async componentDidMount(){
       const USER_ID = await AsyncStorage.getItem('USER_ID');
-      this.setState({USER_ID});
+      console.log("------------------Profile---------------------");
+      console.log(this.state.owner);
+      console.log(USER_ID);
       const user = await axios.get('https://pic-me-back.herokuapp.com/api/user/'+this.state.owner);
-      this.setState({
-        name: user.data.name,
-        profile: user.data.profile.uri,
-        introduct: user.data.introduct,
-        followers: user.data.friends
-      })
       const result = await axios.get('https://pic-me-back.herokuapp.com/api/travel/list/'+USER_ID);
       
       console.log(result.data);
       this.setState({
+        USER_ID,
+        name: user.data.name,
+        profile: user.data.profile.uri,
+        introduct: user.data.introduct,
+        followers: user.data.friends,
         travelList: result.data
       })
     }

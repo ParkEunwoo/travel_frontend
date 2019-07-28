@@ -130,7 +130,7 @@ export default class Detail extends React.Component<Props, State>{
             </View>
             <Button text="저장하기" action={()=>{
               this._storeData();
-              this.props.navigation.navigate('Profile', {owner:this.state.user_id})}} />
+              this.props.navigation.navigate('Spot', {travel_id:this.state.travel_id})}} />
           </View>
         );
     }
@@ -154,12 +154,14 @@ export default class Detail extends React.Component<Props, State>{
       data.append('longitude', longitude);
       data.append('content', content);
       console.log('data', data);
+      console.log(travel_id);
       const config = {
           headers: { 'content-type': 'multipart/form-data' }
       }
       const result = await axios.post('https://pic-me-back.herokuapp.com/api/travel/spot/'+travel_id, data, config);
-      
-      this.props.navigation.navigate('Spot', {travel_id:result.data._id});
+      console.log('-----------------------------post-------------');
+      console.log(result);
+      this.props.navigation.navigate('Spot', {travel_id});
   };
 }
 

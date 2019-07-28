@@ -60,8 +60,8 @@ export default class Map extends React.Component<Props, State>{
         region.latitudeDelta = Math.max(Math.abs(region.latitude - value.latitude), region.latitudeDelta);
         region.longitudeDelta = Math.max(Math.abs(region.longitude - value.longitude), region.longitudeDelta);
       });
-      region.latitudeDelta = region.latitudeDelta==0&&0.04;
-      region.longitudeDelta = region.longitudeDelta==0&&0.04;
+      region.latitudeDelta = region.latitudeDelta*2 + 0.04;
+      region.longitudeDelta = region.longitudeDelta*2 + 0.04;
       const result = await axios.get(`https://pic-me-back.herokuapp.com/api/travel/tourist/spot/${region.latitude}/${region.longitude}/${region.latitudeDelta}/${region.longitudeDelta}`);
       this.setState({
         spotlist:spots.data,

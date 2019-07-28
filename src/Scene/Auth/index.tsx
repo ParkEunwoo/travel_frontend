@@ -24,7 +24,7 @@ export default class Auth extends React.Component<Props, State>{
     };
     _setData = async () => {
       try {
-        await AsyncStorage.multiSet([['USER_ID', '5d3b9a5f2eda6c0004b61bd8'],
+        await AsyncStorage.multiSet([['USER_ID', '5d3d3d0356cc850004db0a39'],
                                     ['TOKEN', 'AAAAOqTOnv3G6a-seRiWI0tm__r-KHjkTjbsaJqJR9QSWaT1VZhuvFqre0FH8qOlT5qywx2FysVbrycTfO24DA9CUfo'],
                                     ['name', '박은우'],
                                     ['profile', 'https://ssl.pstatic.net/static/pwe/address/img_profile.png'],

@@ -30,7 +30,7 @@ export default class Basic extends React.Component<Props, State>{
     }
     static getDerivedStateFromProps(nextProps, preState){
         const {USER_ID, name} = nextProps.navigation.state.params;
-        console.log(nextProps.navigation.state.params);
+        
         if(preState.USER_ID !== USER_ID || preState.name !== name){
             return {
               USER_ID,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, ImageStore } from 'react-native';
 import axios from 'axios';
 
 interface Props {
@@ -9,14 +9,36 @@ interface Props {
 interface State {}
   
 export default class Spot extends React.Component<Props, State>{
+    state = {
+        title: '',
+        content: '',
+        time: '',
+        images: [],
+        page: 0
+    }
+    static getDerivedStateFromProps(nextProps, preState){
+        const {title, content, time, images} = nextProps;
+        if(preState.title !== title || preState.content !== content || preState.time !== time || preState.images !== images){
+            return {
+                title,
+                content,
+                time,
+                images
+            };
+        }
+        return null;
+    }
     render(){
+        
         return (
             <View style={styles.container}>
-                <Image source={require('./../../../assets/travel.jpg')} style={styles.picture} />
+                <TouchableOpacity onPress={()=>this.setState({page:(this.state.page+1)%this.state.images.length})}>
+                    <Image source={{uri:this.state.images[this.state.page].uri}} style={styles.picture} />
+                </TouchableOpacity>
                 <View style={styles.wrapper}>
-                    <Text style={styles.title}>오사카 도톤보리</Text>
-                    <Text style={styles.date}>2019/03/22</Text>
-                    <Text style={styles.content}>엄ㄹ니ㅏㅓㅇ리ㅏㅁ너ㅣ;ㅏ얾니;ㅓ</Text>
+                    <Text style={styles.title}>{this.state.title}</Text>
+                    <Text style={styles.date}>{this.state.time}</Text>
+                    <Text style={styles.content}>{this.state.content}</Text>
                 </View>
             </View>
         );

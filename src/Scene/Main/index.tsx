@@ -31,9 +31,11 @@ export default class Main extends React.Component<Props, State>{
               })
           });
       });
-      const result = await axios.get('https://pic-me-back.herokuapp.com/api/user/'+this.state.USER_ID+'/friends/travel');
-      console.log('main')
-      console.log(result.data);
+      
+      const friends = await axios.get('https://pic-me-back.herokuapp.com/api/user/'+this.state.USER_ID+'/friends');
+
+      const result = await axios.post('https://pic-me-back.herokuapp.com/api/user/friends/travel', friends.data);
+
       this.setState({
         travelList: result.data
       })

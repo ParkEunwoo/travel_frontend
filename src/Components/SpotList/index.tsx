@@ -12,15 +12,24 @@ interface State {}
   
 export default class SpotList extends React.Component<Props, State>{
     state = {
+        spotList:[]
+    }
+    static getDerivedStateFromProps(nextProps, preState){
+        const {spotList} = nextProps;
+        if(preState.spotList !== spotList){
+            return {
+                spotList
+            };
+        }
+        return null;
     }
     render(){
+        const spots = this.state.spotList.map((value, index) => <Spot
+        key={index} title={value.title} time={value.time} content={value.content} images={value.images}
+        />);
         return (
             <ScrollView style={styles.container} horizontal={true} showsHorizontalScrollIndicator={false}>
-            <Spot />
-              <Spot />
-              <Spot />
-              <Spot />
-              <Spot />
+                {spots&&spots}
             </ScrollView>
         );
     }
